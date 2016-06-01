@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <ImageView
+        android:id="@+id/splash_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/afternoon" />
+    <TextView
+        android:id="@+id/splash_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/splash_top_margin"/>
+
+    <EditText
+        android:id="@+id/account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/splash_app_name"
+        android:layout_marginLeft="@dimen/dp_fifty"
+        android:layout_marginRight="@dimen/dp_fifty"
+        android:hint="@string/account"/>
+
+
+
+</RelativeLayout>

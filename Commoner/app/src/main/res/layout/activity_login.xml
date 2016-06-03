@@ -9,17 +9,18 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:src="@drawable/afternoon" />
+
     <TextView
         android:id="@+id/splash_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/splash_top_margin"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/splash_top_margin"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="50sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/account"
@@ -28,8 +29,101 @@
         android:layout_below="@id/splash_app_name"
         android:layout_marginLeft="@dimen/dp_fifty"
         android:layout_marginRight="@dimen/dp_fifty"
-        android:hint="@string/account"/>
+        android:hint="@string/account"
+        android:paddingLeft="@dimen/dp_five"
+        android:drawableLeft="@drawable/account"/>
 
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/account"
+        android:layout_marginLeft="@dimen/dp_fifty"
+        android:layout_marginRight="@dimen/dp_fifty"
+        android:hint="@string/password"
+        android:paddingLeft="@dimen/dp_five"
+        android:drawableLeft="@drawable/pwd"/>
 
+    <Button
+        android:id="@+id/loginbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:layout_marginLeft="@dimen/dp_fifty"
+        android:layout_marginRight="@dimen/dp_fifty"
+        android:layout_marginTop="@dimen/dp_thirty"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="#56abe4"/>
+
+    <RelativeLayout
+        android:id="@+id/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loginbtn"
+        android:layout_marginLeft="@dimen/dp_fifty"
+        android:layout_marginRight="@dimen/dp_fifty">
+
+        <Button
+            android:id="@+id/forgetpwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_five"
+            android:background="@null"
+            android:text="@string/forget"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_five"
+            android:background="@null"
+            android:text="@string/register"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/tools"
+        android:layout_marginLeft="@dimen/dp_fifty"
+        android:layout_marginRight="@dimen/dp_fifty"
+        android:layout_marginTop="@dimen/dp_thirty"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/dp_thirty">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="@dimen/dp_thirty"
+            android:layout_marginRight="@dimen/dp_thirty"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/qq"
+                android:layout_width="@dimen/dp_fifty"
+                android:layout_height="@dimen/dp_fifty"
+                android:src="@drawable/qq" />
+
+            <ImageView
+                android:id="@+id/sina"
+                android:layout_width="@dimen/dp_fifty"
+                android:layout_height="@dimen/dp_fifty"
+                android:layout_marginLeft="@dimen/dp_five"
+                android:src="@drawable/sina" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

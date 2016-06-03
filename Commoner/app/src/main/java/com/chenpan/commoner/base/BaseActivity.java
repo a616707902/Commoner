@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  * V,T未指定类型，这里我们让子类去定义
  * Created by Administrator on 2016/5/24.
  */
-public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
+public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity implements IBase{
     public T mPresenter;
     /**
      * 主线程
@@ -55,18 +55,13 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         setSupportActionBar(mToolbar);//这里要用到主题必须是隐藏了action的
         bindViewAndAction(savedInstanceState);
     }
-
     /**
-     * 绑定视图监听
-     */
-    public abstract void bindViewAndAction(Bundle savedInstanceState);
-
-    /**
-     * 得到当前的xml布局
+     * 在父类里面创建，在子类里面具体实现
      *
      * @return
      */
-    public abstract int getContentLayout();
+   public abstract T createPresenter();
+
 
     /**
      * 绑定视图
@@ -106,12 +101,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         super.onDestroy();
     }
 
-    /**
-     * 在父类里面创建，在子类里面具体实现
-     *
-     * @return
-     */
-    public abstract T createPresenter();
 
     /**
      * 设置通知栏颜色

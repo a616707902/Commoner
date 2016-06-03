@@ -11,14 +11,6 @@ import java.util.Map;
  * Created by Administrator on 2016/6/1.
  */
 public interface MainMode {
-public  void login(Context context,Map<String ,String> map,LoginLisener loginLisener);
-    interface LoginLisener{
 
-        /**
-         * 加载数据的监听
-         * @param result
-         */
-        void saveUser(User result);
-    }
 
 }

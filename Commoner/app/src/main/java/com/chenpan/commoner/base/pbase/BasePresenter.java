@@ -36,4 +36,6 @@ public abstract class BasePresenter<T> {
         return mWeakView.get();
     }
 
+    public void  init(){};
+
 }

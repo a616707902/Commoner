@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.chenpan.commoner.adapter.ArticleTabAdapter;
+import com.chenpan.commoner.adapter.VideoTabAdapter;
 import com.chenpan.commoner.base.BaseActivity;
 import com.chenpan.commoner.bean.User;
 import com.chenpan.commoner.bean.UserManager;
@@ -27,6 +29,8 @@ import com.example.chenpan.library.model.interfaces.IDrawerItem;
 import com.example.chenpan.library.model.interfaces.IProfile;
 import com.example.chenpan.library.util.RecyclerViewCacheUtil;
 
+import java.util.Arrays;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -35,13 +39,12 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.tabs)
-    TabLayout tabs;
+    TabLayout mTabLayout;
     @Bind(R.id.viewpager)
-    ViewPager viewpager;
+    ViewPager mViewPager;
 
-    private TabLayout mTabLayout;
-    private ViewPager mViewPager;
-    private Toolbar mToolbar;
+
+
     /**
      * 侧滑头部
      */
@@ -75,6 +78,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
+        setupTextViewPager();
         if (UserManager.getInstance().isLogin()) {
             profile = new ProfileDrawerItem().withName(UserManager.getInstance().getUser().screen_name).withIcon(Uri.parse(UserManager.getInstance().getUser().profile_image_url)).withIdentifier(100);
 
@@ -92,7 +96,8 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                         if (UserManager.getInstance().isLogin()) {
                             return true;
                         } else {
-                            Intent intent = new Intent();
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
 
                             return true;
                         }
@@ -102,15 +107,16 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                 .build();
         result = new DrawerBuilder()
                 .withActivity(this)
-                .withToolbar(mToolbar)
+                .withToolbar(toolbar)
                 .withHasStableIds(true)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("视频").withIcon(R.mipmap.ic_launcher).withIdentifier(1).withSelectable(true),
-                        new PrimaryDrawerItem().withName("图片").withIcon(R.mipmap.ic_launcher).withIdentifier(2).withSelectable(true).withBadgeStyle(new BadgeStyle().withTextColor(Color.WHITE).withColorRes(R.color.md_red_700)),
-                        new PrimaryDrawerItem().withName("文章").withIcon(R.mipmap.ic_launcher).withIdentifier(3).withSelectable(true),
+                        new PrimaryDrawerItem().withName(R.string.video).withIcon(R.drawable.videoicon).withIdentifier(1).withSelectable(true),
+                        new PrimaryDrawerItem().withName(R.string.picture).withIcon(R.drawable.pictureicon).withIdentifier(2).withSelectable(true).withBadgeStyle(new BadgeStyle().withTextColor(Color.WHITE).withColorRes(R.color.md_red_700)),
+                        new PrimaryDrawerItem().withName(R.string.article).withIcon(R.drawable.article).withIdentifier(3).withSelectable(true),
+                        new PrimaryDrawerItem().withName(R.string.music).withIcon(R.drawable.musicicon).withIdentifier(4).withSelectable(true),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName("设置").withIcon(R.mipmap.ic_launcher).withIdentifier(5).withSelectable(false)
+                        new PrimaryDrawerItem().withName(R.string.setting).withIcon(R.drawable.settingicon).withIdentifier(6).withSelectable(false)
 
                 ) // add the items we want to use with our Drawer
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -160,7 +166,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
             //set the active profile
             headerResult.setActiveProfile(profile);
         }
-        result.updateBadge(4, new StringHolder(10 + ""));
+        result.updateBadge(5, new StringHolder(10 + ""));
     }
 
     @Override
@@ -199,6 +205,24 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         if (result != null && result.isDrawerOpen()) {
             result.closeDrawer();
         }
+    }
+
+   /* private void setupVideoViewPager() {
+        String[] titles = getResources().getStringArray(R.array.video_tab);
+        VideoTabAdapter adapter =
+                new VideoTabAdapter(getSupportFragmentManager(), Arrays.asList(titles));
+        mViewPager.setAdapter(adapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabsFromPagerAdapter(adapter);
+    }*/
+
+    private void setupTextViewPager() {
+        String[] titles = getResources().getStringArray(R.array.text_tab);
+        ArticleTabAdapter adapter =
+                new ArticleTabAdapter(getSupportFragmentManager(), Arrays.asList(titles));
+        mViewPager.setAdapter(adapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabsFromPagerAdapter(adapter);
     }
 
 

@@ -15,16 +15,7 @@ import java.util.Map;
  */
 public class MainPresenter extends BasePresenter<MainView> {
     MainMode mainMode = new IMainMode();
-    User user = null;
 
-    public void login(Context context, Map<String, String> map) {
-        getWeakView().showLogin();
-        mainMode.login(context, map, new MainMode.LoginLisener() {
-            @Override
-            public void saveUser(User result) {
-                getWeakView().setUserInfo(result);
-            }
-        });
 
-    }
+
 }

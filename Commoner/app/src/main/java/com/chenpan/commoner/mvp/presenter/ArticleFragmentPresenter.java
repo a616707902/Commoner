@@ -18,16 +18,39 @@ public class ArticleFragmentPresenter extends BasePresenter<IArticleFragmentView
 
     private ArticleFragmentModel articleFragmentModel=new IArticleFragmentModel();
 
-    private void getArticleList(Context context,String url,String tag,Map<String,String> map){
+    public void getArticleList(Context context,String url,String tag, final Map<String,String> params){
+        if (!getWeakView().checkNet()) {
+            getWeakView().onRefreshComplete();
+            getWeakView().onLoadMoreComplete();
+            getWeakView().showNoNet();
+            return;
+        }
         articleFragmentModel.parserArticle(context,url,tag ,new ArticleFragmentModel.Callback<List<ArticleBean>>() {
             @Override
             public void onSccuss(List<ArticleBean> data) {
-
+                if (getWeakView() == null) return;
+                getWeakView().onRefreshComplete();
+                getWeakView().onLoadMoreComplete();
+                if ("0".equals(params.get("page"))) {
+                    if (data.size() == 0) {
+                        getWeakView().showEmpty();
+                    } else {
+                        getWeakView().setAdapter(data);
+                        getWeakView().showSuccess();
+                    }
+                } else {
+                    getWeakView().loadMore(data);
+                }
             }
 
             @Override
             public void onFaild() {
-
+                if (getWeakView() == null) return;
+                getWeakView().onRefreshComplete();
+                getWeakView().onLoadMoreComplete();
+                if ("0".equals(params.get("page"))){
+                    getWeakView().showFaild();
+                }
             }
         });
     }

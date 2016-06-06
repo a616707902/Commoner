@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="splash_top_margin" >130dp</dimen>
+    <dimen name="splash_top_margin">130dp</dimen>
     <dimen name="dp_fifty">50dp</dimen>
     <dimen name="dp_thirty">30dp</dimen>
     <dimen name="dp_five">5dp</dimen>

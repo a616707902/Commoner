@@ -10,8 +10,13 @@ import com.chenpan.commoner.base.BaseFragment;
 import com.chenpan.commoner.bean.ArticleBean;
 import com.chenpan.commoner.mvp.presenter.ArticleFragmentPresenter;
 import com.chenpan.commoner.mvp.view.IArticleFragmentView;
+import com.chenpan.commoner.network.NetWorkUtil;
+import com.chenpan.commoner.widget.load.LoadingView;
+import com.chenpan.commoner.widget.load.OnRetryListener;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,10 +29,22 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
     RecyclerView recyclerView;
     @Bind(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
+    @Bind(R.id.fl_loading)
+    LoadingView flLoading;
     /**
      * 访问的网址  这里盗链开始
      */
     private String url;
+    /**
+     * 网页上的当前页数
+     */
+    private int page = 0;
+    private int pageNo = 0;
+    private final int pageSize = 30;
+    /**
+     * 封装传递到网络的数据
+     */
+    private Map<String, String> params = new TreeMap<>();
 
 
     @Override
@@ -37,15 +54,31 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
 
     @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
+        params.put("url", url);
+        params.put("page", String.valueOf(page));
         if (TextUtils.isEmpty(url) || mPresenter == null || !(mPresenter instanceof ArticleFragmentPresenter)) {
             return;
         }
+        flLoading.withLoadedEmptyText("≥﹏≤ , 连条毛都没有 !").withEmptyIco(R.drawable.note_empty).withBtnEmptyEnnable(false)
+                .withErrorIco(R.drawable.ic_chat_empty).withLoadedErrorText("(῀( ˙᷄ỏ˙᷅ )῀)ᵒᵐᵍᵎᵎᵎ,我家程序猿跑路了 !").withbtnErrorText("去找回她!!!")
+                .withLoadedNoNetText("你挡着信号啦o(￣ヘ￣o)☞ᗒᗒ 你走").withNoNetIco(R.drawable.ic_chat_empty).withbtnNoNetText("网弄好了，重试")
+                .withLoadingText("加载中...").withOnRetryListener(new OnRetryListener() {
+            @Override
+            public void onRetry() {
+                mPresenter.getArticleList(getActivity(), url, "getarticle", params);
+            }
+        }).build();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                params.put("url", url);
+                params.put("page", String.valueOf(page));
+                mPresenter.getArticleList(getActivity(), url, "getarticle", params);
             }
         });
+
+        mPresenter.getArticleList(getActivity(), url, "getarticle", params);
+
     }
 
     @Override
@@ -85,7 +118,7 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
 
     @Override
     public boolean checkNet() {
-        return false;
+        return NetWorkUtil.isNetWorkConnected(mContext);
     }
 
     @Override
@@ -104,9 +137,5 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
 
 
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
+
 }

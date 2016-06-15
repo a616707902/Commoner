@@ -13,9 +13,8 @@ import android.widget.TextView;
 
 import com.chenpan.commoner.R;
 import com.chenpan.commoner.network.NetWorkUtil;
-import com.chenpan.commoner.utils.Typefaces;
-import com.chenpan.commoner.widget.wave.Titanic;
-import com.chenpan.commoner.widget.wave.TitanicTextView;
+import com.chenpan.commoner.widget.loadview.CatLoadingView;
+import com.chenpan.commoner.widget.loadview.GraduallyTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,10 +24,79 @@ import butterknife.OnClick;
  * Created by sysadminl on 2016/1/21.
  */
 public class LoadingView extends FrameLayout {
+
+    /**
+     * 判断加载状态
+     */
+    private LoadingState mState;
+    private Context mContext;
+    @Bind(R.id.ll_over)
+    LinearLayout ll_over;
+
+    @Bind(R.id.ll_loading)
+    LinearLayout ll_loading;
+
+
+    @Bind(R.id.tv_loaded)
+    TextView tv_loaded;
+
+/*    @Bind(R.id.tv_loading)
+    TextView tv_loading;*/
+
+    @Bind(R.id.btn_loaded)
+    Button btn_loaded;
+    @Bind(R.id.iv_loading)
+    CatLoadingView iv_loading;
+    /*@Bind( R.id.graduallyTextView)
+    GraduallyTextView mGraduallyTextView;*/
+    @Bind(R.id.iv_loaded)
+    ImageView iv_loaded;
+    public boolean btn_empty_ennable = true;
+    public boolean btn_error_ennable = true;
+    public boolean btn_nonet_ennable = true;
+
+    /**
+     * 加载中提示文字
+     */
+    private String mLoadingText;
+    /**
+     * 加载的图片
+     */
+    // private int mLoadingIco;
+    /**
+     * 加载数据为空提示文字
+     */
+    private String mLoaded_empty_text;
+    /**
+     * 数据加载为空时显示的图片
+     */
+    private int mEmptyIco;
+    /**
+     * 没网提示
+     */
+    private String mLoaded_not_net_text;
+    /**
+     * 没网显示的图片
+     */
+    private int mNoNetIco;
+    /**
+     * 从新加载的监听
+     */
+    public OnRetryListener mOnRetryListener;
+    /**
+     * 后台或者本地出现错误提示
+     */
+    private String mLoaded_error_text;
+    /**
+     * 出现错误时显示的图片
+     */
+    private int mErrorIco;
+
     public LoadingView(Context context) {
         super(context);
         mContext = context;
     }
+
 
     @Override
     public void setVisibility(int visibility) {
@@ -36,11 +104,15 @@ public class LoadingView extends FrameLayout {
        /* if (View.GONE == visibility && mState == LoadingState.STATE_LOADING && animation != null && animation.isRunning()) {
             animation.stop();
         }*/
-        if (View.GONE == visibility && mState == LoadingState.STATE_LOADING ) {
-            iv_loading.stopLoading();
+        if (View.GONE == visibility && mState == LoadingState.STATE_LOADING) {
+            iv_loading.setVisibility(visibility);
         }
-    }
 
+    }
+  /*  public  void stop(){
+        iv_loading.stopLoading();
+    }
+*/
     public LoadingView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
@@ -57,22 +129,6 @@ public class LoadingView extends FrameLayout {
         mContext = context;
     }
 
-    private Context mContext;
-    @Bind(R.id.ll_over)
-    LinearLayout ll_over;
-
-    @Bind(R.id.ll_loading)
-    LinearLayout ll_loading;
-
-
-    @Bind(R.id.tv_loaded)
-    TextView tv_loaded;
-
-    @Bind(R.id.tv_loading)
-    TextView tv_loading;
-
-    @Bind(R.id.btn_loaded)
-    Button btn_loaded;
 
     @OnClick(R.id.btn_loaded)
     public void onClick() {
@@ -82,23 +138,10 @@ public class LoadingView extends FrameLayout {
         }
     }
 
-    @Bind(R.id.iv_loading)
-    com.mingle.widget.LoadingView iv_loading;
-
-    @Bind(R.id.iv_loaded)
-    ImageView iv_loaded;
-
-    /**
-     * 加载中提示文字
-     */
-    private String mLoadingText;
-    /**
-     * 加载的图片
-     */
-   // private int mLoadingIco;
 
     /**
      * 设置加载图片
+     *
      * @param resId
      * @return
      */
@@ -106,53 +149,27 @@ public class LoadingView extends FrameLayout {
         mLoadingIco = resId;
         return this;
     }*/
-
-
-    /**
-     * 加载数据为空提示文字
-     */
-    private String mLoaded_empty_text;
-    /**
-     * 数据加载为空时显示的图片
-     */
-    private int mEmptyIco;
-
     public LoadingView withEmptyIco(int resId) {
         mEmptyIco = resId;
         return this;
     }
 
-    /**
-     * 没网提示
-     */
-    private String mLoaded_not_net_text;
-    /**
-     * 没网显示的图片
-     */
-    private int mNoNetIco;
 
     public LoadingView withNoNetIco(int resId) {
         mNoNetIco = resId;
         return this;
     }
 
-    /**
-     * 从新加载的监听
-     */
-    public OnRetryListener mOnRetryListener;
 
     public LoadingView withOnRetryListener(OnRetryListener mOnRetryListener) {
         this.mOnRetryListener = mOnRetryListener;
         return this;
     }
 
-    /**
-     * 判断加载状态
-     */
-    private LoadingState mState;
 
     /**
      * 设置加载状态
+     *
      * @param state
      */
     public void setState(LoadingState state) {
@@ -160,23 +177,23 @@ public class LoadingView extends FrameLayout {
             return;
         } else if (state == LoadingState.STATE_LOADING) {
             ll_over.setVisibility(GONE);
+          //  mGraduallyTextView.startLoading();
             ll_loading.setVisibility(VISIBLE);
         } else if (state != LoadingState.STATE_LOADING) {
+          //  mGraduallyTextView.stopLoading();
             ll_loading.setVisibility(GONE);
             ll_over.setVisibility(VISIBLE);
            /* if (animation != null&&mState==LoadingState.STATE_LOADING)
                 animation.stop();*/
-            iv_loading.stopLoading();
+            //iv_loading.stopLoading();
         }
         changeState(state);
     }
 
-    public boolean btn_empty_ennable = true;
-    public boolean btn_error_ennable = true;
-    public boolean btn_nonet_ennable = true;
 
     /**
      * 没网按钮点击
+     *
      * @param ennable
      * @return
      */
@@ -187,6 +204,7 @@ public class LoadingView extends FrameLayout {
 
     /**
      * 错误按钮点击
+     *
      * @param ennable
      * @return
      */
@@ -197,6 +215,7 @@ public class LoadingView extends FrameLayout {
 
     /**
      * 返回空按钮点击
+     *
      * @param ennable
      * @return
      */
@@ -205,34 +224,24 @@ public class LoadingView extends FrameLayout {
         return this;
     }
 
-   // private AnimationDrawable animation;
+    // private AnimationDrawable animation;
     /**
      * 承载加载的动画
      */
-  //  private Titanic titanic;
+    //  private Titanic titanic;
 
     /**
      * 改变加载状态
+     *
      * @param state
      */
     private void changeState(LoadingState state) {
         switch (state) {
             case STATE_LOADING:
                 mState = LoadingState.STATE_LOADING;
-               // iv_loading.setImageResource(mLoadingIco);
-              //  iv_loading.setTypeface(Typefaces.get(mContext, "Satisfy-Regular.ttf"));
-                tv_loading.setText(mLoadingText);
-             /*   if (titanic==null){
-                    titanic=new Titanic();
-                }
-                if (titanic!=null){
-                    titanic.start(iv_loading);
-                }*/
-               /* if (animation == null) {
-                    animation = (AnimationDrawable) iv_loading.getDrawable();
-                }
-                if (animation != null)
-                    animation.start();*/
+
+                iv_loading.setVisibility(VISIBLE);
+
                 break;
             case STATE_EMPTY:
                 mState = LoadingState.STATE_EMPTY;
@@ -271,15 +280,6 @@ public class LoadingView extends FrameLayout {
 
     }
 
-
-    /**
-     * 后台或者本地出现错误提示
-     */
-    private String mLoaded_error_text;
-    /**
-     * 出现错误时显示的图片
-     */
-    private int mErrorIco;
 
     public LoadingView withErrorIco(int resId) {
         mErrorIco = resId;
@@ -358,4 +358,5 @@ public class LoadingView extends FrameLayout {
             setState(LoadingState.STATE_NO_NET);
         }
     }
+
 }

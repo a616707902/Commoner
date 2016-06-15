@@ -40,6 +40,12 @@ public class LoadingView extends FrameLayout {
 
     private String mLoadText;
 
+    ObjectAnimator objectAnimatorFall;
+    ObjectAnimator scaleIndicationFall;
+    ObjectAnimator objectAnimatorUp;
+    ObjectAnimator scaleIndicationUp;
+    DecelerateInterpolator decelerateInterpolator;
+    AccelerateInterpolator accelerateInterpolator;
 
     public LoadingView(Context context) {
         super(context);
@@ -57,7 +63,8 @@ public class LoadingView extends FrameLayout {
                 .obtainStyledAttributes(attrs, R.styleable.LoadingView);
         mLoadText = typedArray.getString(R.styleable.LoadingView_loadingText);
         mTextAppearance = typedArray.getResourceId(R.styleable.LoadingView_loadingTextAppearance, -1);
-
+        decelerateInterpolator = new DecelerateInterpolator(factor);
+        accelerateInterpolator = new AccelerateInterpolator(factor);
         typedArray.recycle();
     }
 
@@ -110,14 +117,14 @@ public class LoadingView extends FrameLayout {
 
     private AnimatorSet mAnimatorSet = null;
 
-    private Runnable mFreeFallRunnable = new Runnable() {
+    public  Runnable mFreeFallRunnable = new Runnable() {
         @Override
         public void run() {
             freeFall();
         }
     };
 
-    public  void startLoading(long delay) {
+    public void startLoading(long delay) {
         if (mAnimatorSet != null && mAnimatorSet.isRunning()) {
             return;
         }
@@ -165,10 +172,10 @@ public class LoadingView extends FrameLayout {
      * 上抛
      */
     public void upThrow() {
-
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mShapeLoadingView, "translationY", mDistance, 0);
-        ObjectAnimator scaleIndication = ObjectAnimator.ofFloat(mIndicationIm, "scaleX", 0.2f, 1);
-
+        if (objectAnimatorUp == null) {
+            objectAnimatorUp = ObjectAnimator.ofFloat(mShapeLoadingView, "translationY", mDistance, 0);
+            scaleIndicationUp = ObjectAnimator.ofFloat(mIndicationIm, "scaleX", 0.2f, 1);
+        }
 
         ObjectAnimator objectAnimator1 = null;
         switch (mShapeLoadingView.getShape()) {
@@ -190,13 +197,13 @@ public class LoadingView extends FrameLayout {
         }
 
 
-        objectAnimator.setDuration(ANIMATION_DURATION);
+        objectAnimatorUp.setDuration(ANIMATION_DURATION);
         objectAnimator1.setDuration(ANIMATION_DURATION);
-        objectAnimator.setInterpolator(new DecelerateInterpolator(factor));
-        objectAnimator1.setInterpolator(new DecelerateInterpolator(factor));
+        objectAnimatorUp.setInterpolator(decelerateInterpolator);
+        objectAnimator1.setInterpolator(decelerateInterpolator);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.setDuration(ANIMATION_DURATION);
-        animatorSet.playTogether(objectAnimator, objectAnimator1, scaleIndication);
+        animatorSet.playTogether(objectAnimatorUp, objectAnimator1, scaleIndicationUp);
 
 
         animatorSet.addListener(new Animator.AnimatorListener() {
@@ -208,7 +215,7 @@ public class LoadingView extends FrameLayout {
             @Override
             public void onAnimationEnd(Animator animation) {
                 freeFall();
-
+                System.gc();
 
             }
 
@@ -233,16 +240,16 @@ public class LoadingView extends FrameLayout {
      * 下落
      */
     public void freeFall() {
+        if (objectAnimatorFall == null) {
+            objectAnimatorFall = ObjectAnimator.ofFloat(mShapeLoadingView, "translationY", 0, mDistance);
+            scaleIndicationFall = ObjectAnimator.ofFloat(mIndicationIm, "scaleX", 1, 0.2f);
+        }
 
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mShapeLoadingView, "translationY", 0, mDistance);
-        ObjectAnimator scaleIndication = ObjectAnimator.ofFloat(mIndicationIm, "scaleX", 1, 0.2f);
-
-
-        objectAnimator.setDuration(ANIMATION_DURATION);
-        objectAnimator.setInterpolator(new AccelerateInterpolator(factor));
+        objectAnimatorFall.setDuration(ANIMATION_DURATION);
+        objectAnimatorFall.setInterpolator(accelerateInterpolator);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.setDuration(ANIMATION_DURATION);
-        animatorSet.playTogether(objectAnimator, scaleIndication);
+        animatorSet.playTogether(objectAnimatorFall, scaleIndicationFall);
         animatorSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {

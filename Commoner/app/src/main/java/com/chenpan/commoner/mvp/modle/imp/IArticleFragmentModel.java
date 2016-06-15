@@ -13,15 +13,20 @@ import com.chenpan.commoner.network.VolleyRequest;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Entities;
 import org.jsoup.select.Elements;
 import org.xml.sax.InputSource;
 
 import java.io.StringReader;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilderFactory;
+
+import retrofit.http.Url;
 
 /**
  * Created by Administrator on 2016/6/3.
@@ -36,7 +41,10 @@ public class IArticleFragmentModel implements ArticleFragmentModel {
                 try {
                     StringReader sr = new StringReader(results);
                     InputSource is = new InputSource(sr);
-                    Document result = (Document) DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
+                   String resultSs= URLDecoder.decode(results, "UTF-8");
+                    Document result= Jsoup.parse(resultSs);
+                    Entities.EscapeMode.base.getMap().clear();
+                   // Document result = (Document) DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
                     Elements postHeads = result.getElementsByClass("PostHead");
                     Elements postContent1s = result.getElementsByClass("PostContent1");
                     List<ArticleBean> list = new ArrayList<ArticleBean>(postHeads.size());

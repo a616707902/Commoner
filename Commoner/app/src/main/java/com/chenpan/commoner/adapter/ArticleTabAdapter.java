@@ -3,6 +3,7 @@ package com.chenpan.commoner.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.chenpan.commoner.fragment.ArticleFragment;
 
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/6/2.
  */
-public class ArticleTabAdapter extends FragmentPagerAdapter {
+public class ArticleTabAdapter extends FragmentStatePagerAdapter {
     private List<String> mTitles;
 
     public ArticleTabAdapter(FragmentManager fm, List<String> titles) {
@@ -30,6 +31,8 @@ public class ArticleTabAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return mTitles.size();
     }
+
+
 
     @Override
     public CharSequence getPageTitle(int position) {

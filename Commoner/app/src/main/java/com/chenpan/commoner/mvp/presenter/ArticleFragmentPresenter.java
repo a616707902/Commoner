@@ -17,8 +17,9 @@ import java.util.Map;
 public class ArticleFragmentPresenter extends BasePresenter<IArticleFragmentView> {
 
     private ArticleFragmentModel articleFragmentModel=new IArticleFragmentModel();
-
+private  String url;
     public void getArticleList(Context context,String url,String tag, final Map<String,String> params){
+this.url=url;
         if (!getWeakView().checkNet()) {
             getWeakView().onRefreshComplete();
             getWeakView().onLoadMoreComplete();

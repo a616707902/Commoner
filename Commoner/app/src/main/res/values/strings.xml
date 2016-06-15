@@ -80,4 +80,5 @@
         <item>励志奖学金@panjichang@http://www.lz13.cn/lizhi/lizhijiangxuejin.html</item>
     </array>
     <string name="title_activity_k">KActivity</string>
+    <string name="title_activity_article">ArticleActivity</string>
 </resources>

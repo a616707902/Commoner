@@ -56,8 +56,8 @@ public class StringRequestUTF extends Request<String>{
         protected Response<String> parseNetworkResponse(NetworkResponse response) {
             String parsed;
             try {
-                parsed = new String(response.data, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
+                parsed = new String(response.data,"UTF-8");
+            } catch (Exception e) {
                 parsed = new String(response.data);
             }
             return Response.success(parsed, HttpHeaderParser.parseCacheHeaders(response));

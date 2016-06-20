@@ -56,7 +56,7 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
     private Map<String, String> params = new TreeMap<>();
     private BaseRecyclerAdapter mAdapter;
     private boolean canLoadMore = true;
-
+    LinearLayoutManager mLayoutManager;
 
     @Override
     public ArticleFragmentPresenter createPresenter() {
@@ -87,20 +87,31 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
                 mPresenter.getArticleList(getActivity(), url, url, params);
             }
         });
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(recyclerView.getContext());
+        mLayoutManager = new LinearLayoutManager(recyclerView.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (canLoadMore);
-                 //   ArticleFragment.this.onScrolled(recyclerView, dx, dy);
+                   ArticleFragment.this.onScrolled(recyclerView, dx, dy);
             }
         });
 
         mPresenter.getArticleList(getActivity(), url, url, params);
 
 
+    }
+
+    private void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        int lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+        int totalItemCount = mLayoutManager.getItemCount();
+        //lastVisibleItem >= totalItemCount - 2 表示剩下2个item自动加载，各位自由选择
+        // dy>0 表示向下滑动
+        if (!isLoadingMore && lastVisibleItem >= totalItemCount - 4 && dy > 0) {
+            isLoadingMore = true;
+            loadPage();//这里多线程也要手动控制isLoadingMore
+        }
     }
 
     @Override
@@ -191,5 +202,10 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
        // flLoading.stop();
         super.onPause();
 
+    }
+    private void loadPage() {
+        params.put("url", url.replace(".html", "-" + (++page) + ".html"));
+        params.put("page", String.valueOf(page));
+        mPresenter.getArticleList(getActivity(), url,url, params);
     }
 }

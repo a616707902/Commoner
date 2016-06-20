@@ -1,5 +1,7 @@
 package com.chenpan.commoner.base.pbase;
 
+import java.lang.ref.Reference;
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 /**
@@ -9,15 +11,15 @@ public abstract class BasePresenter<T> {
     /**
      * 使用弱引用，当内存不足时，垃圾回收机制回收对象
      */
-    public WeakReference<T> mWeakView;
-
+    //public WeakReference<T> mWeakView;
+    public SoftReference<T> mWeakView;
     /**
      * 绑定View
      *
      * @param view
      */
     public void attachView(T view) {
-        mWeakView = new WeakReference<T>(view);
+        mWeakView = new SoftReference<T>(view);
     }
 
     /**

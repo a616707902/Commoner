@@ -39,11 +39,12 @@ public class IArticleFragmentModel implements ArticleFragmentModel {
             @Override
             public void onMySuccess(String results) {
                 try {
-                    StringReader sr = new StringReader(results);
-                    InputSource is = new InputSource(sr);
-                   String resultSs= URLDecoder.decode(results, "UTF-8");
-                    Document result= Jsoup.parse(resultSs);
+                  /*  StringReader sr = new StringReader(results);
+                    InputSource is = new InputSource(sr);*/
+                 //  String resultSs= URLDecoder.decode(results, "UTF-8");
                     Entities.EscapeMode.base.getMap().clear();
+                    Document result= Jsoup.parse(results,"ISO-8859-1");
+
                    // Document result = (Document) DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
                     Elements postHeads = result.getElementsByClass("PostHead");
                     Elements postContent1s = result.getElementsByClass("PostContent1");

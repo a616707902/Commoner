@@ -1,31 +1,77 @@
 package com.chenpan.commoner;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.text.Html;
+import android.view.MenuItem;
+import android.widget.TextView;
 
-import com.chenpan.commoner.R;
+import com.chenpan.commoner.base.BaseActivity;
+import com.chenpan.commoner.bean.ArticleBean;
+import com.chenpan.commoner.mvp.presenter.ArticlePresenter;
+import com.chenpan.commoner.mvp.view.ArticleView;
 
-public class ArticleActivity extends AppCompatActivity {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class ArticleActivity extends BaseActivity<ArticleView, ArticlePresenter> implements ArticleView {
+    ArticleBean mArticle;
+    @Bind(R.id.tv_content)
+    TextView tvContent;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_article);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    public ArticlePresenter createPresenter() {
+        return new ArticlePresenter();
     }
+
+    @Override
+    public int getToolBarId() {
+        return R.id.toolbar;
+    }
+
+    @Override
+    public void bindViewAndAction(Bundle savedInstanceState) {
+        if (mPresenter == null) return;
+        mPresenter.getcontentArticle(this, mArticle.href);
+    }
+
+    @Override
+    public int getContentLayout() {
+        return R.layout.activity_article;
+    }
+
+    @Override
+    public void getIntentValue() {
+        mArticle = getIntent().getParcelableExtra("article");
+    }
+
+    @Override
+    public void setActionBar() {
+        getSupportActionBar().setTitle(mArticle.title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(false);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void showFild() {
+
+    }
+
+    @Override
+    public void setArticle(String article) {
+        if (tvContent == null) return;
+        tvContent.setText(Html.fromHtml(article));
+    }
+
 
 }

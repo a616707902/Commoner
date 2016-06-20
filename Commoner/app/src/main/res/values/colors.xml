@@ -14,6 +14,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="comment_text_color">#ff333333</color>
     <color name="textColor">#ff909090</color>
-
+    <color name="actionbar_color">#ff607d8b</color>
 
 </resources>

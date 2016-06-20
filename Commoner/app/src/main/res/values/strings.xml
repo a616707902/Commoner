@@ -81,4 +81,5 @@
     </array>
     <string name="title_activity_k">KActivity</string>
     <string name="title_activity_article">ArticleActivity</string>
+    <string name="title_activity_photo">PhotoActivity</string>
 </resources>

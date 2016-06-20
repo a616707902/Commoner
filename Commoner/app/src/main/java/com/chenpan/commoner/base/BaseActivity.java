@@ -44,6 +44,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         super.onCreate(savedInstanceState);
         AppManager.getAppManager().addActivity(this);
         initWindow();
+        getIntentValue();
         mRootView = createView(null, null, savedInstanceState);
         setContentView(mRootView);
         //创建presenter
@@ -53,8 +54,17 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         mPresenter.attachView((V) this);
         mToolbar = (Toolbar) findViewById(getToolBarId());
         setSupportActionBar(mToolbar);//这里要用到主题必须是隐藏了action的
+        setActionBar();
         bindViewAndAction(savedInstanceState);
     }
+
+    public void setActionBar() {
+    }
+
+    public void getIntentValue() {
+        
+    }
+
     /**
      * 在父类里面创建，在子类里面具体实现
      *

@@ -23,7 +23,7 @@ public class ArticleTabAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         ArticleFragment fragment = new ArticleFragment();
-        fragment.setUrl(mTitles.get(position).split("@panjichang@")[1]);
+        fragment.setUrl(mTitles.get(position).split("@chenpan@")[1]);
         return fragment;
     }
 
@@ -36,6 +36,6 @@ public class ArticleTabAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mTitles.get(position).split("@panjichang@")[0];
+        return mTitles.get(position).split("@chenpan@")[0];
     }
 }

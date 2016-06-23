@@ -16,17 +16,18 @@ import java.util.Map;
  */
 public class ArticleFragmentPresenter extends BasePresenter<IArticleFragmentView> {
 
-    private ArticleFragmentModel articleFragmentModel=new IArticleFragmentModel();
-private  String url;
-    public void getArticleList(Context context,String url,String tag, final Map<String,String> params){
-this.url=url;
+    private ArticleFragmentModel articleFragmentModel = new IArticleFragmentModel();
+    private String url;
+
+    public void getArticleList(Context context, String url, String tag, final Map<String, String> params) {
+        this.url = url;
         if (!getWeakView().checkNet()) {
             getWeakView().onRefreshComplete();
             getWeakView().onLoadMoreComplete();
             getWeakView().showNoNet();
             return;
         }
-        articleFragmentModel.parserArticle(context,url,tag ,new ArticleFragmentModel.Callback<List<ArticleBean>>() {
+        articleFragmentModel.parserArticle(context, url, tag, new ArticleFragmentModel.Callback<List<ArticleBean>>() {
             @Override
             public void onSccuss(List<ArticleBean> data) {
                 if (getWeakView() == null) return;
@@ -49,7 +50,7 @@ this.url=url;
                 if (getWeakView() == null) return;
                 getWeakView().onRefreshComplete();
                 getWeakView().onLoadMoreComplete();
-                if ("0".equals(params.get("page"))){
+                if ("0".equals(params.get("page"))) {
                     getWeakView().showFaild();
                 }
             }

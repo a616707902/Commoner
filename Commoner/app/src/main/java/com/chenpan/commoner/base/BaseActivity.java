@@ -144,5 +144,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         mUIThreadId = android.os.Process.myTid();
         super.onNewIntent(intent);
     }
-
+    public Toolbar getToolbar() {
+        return mToolbar;
+    }
 }

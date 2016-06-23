@@ -16,68 +16,81 @@
     <string name="music">音乐</string>
     <string name="loading">loading</string>
     <array name="video_tab">
-        <item>电影@panjichang@6</item>
-        <item>最美创意@panjichang@1</item>
-        <item>动画精选@panjichang@0</item>
-        <item>热门电影@panjichang@7</item>
-        <item>MV@panjichang@4</item>
-        <item>广告/宣传@panjichang@8</item>
-        <item>剧情/短片@panjichang@9</item>
-        <item>游戏CG@panjichang@2</item>
-        <item>预告/花絮@panjichang@3</item>
+        <item>电影@chenpan@6</item>
+        <item>最美创意@chenpan@1</item>
+        <item>动画精选@chenpan@0</item>
+        <item>热门电影@chenpan@7</item>
+        <item>MV@chenpan@4</item>
+        <item>广告/宣传@chenpan@8</item>
+        <item>剧情/短片@chenpan@9</item>
+        <item>游戏CG@chenpan@2</item>
+        <item>预告/花絮@chenpan@3</item>
 
 
-        <!--  <item>院线热映@panjichang@5</item>-->
+        <!--  <item>院线热映@chenpan@5</item>-->
 
 
-        <item>轻松学堂@panjichang@100</item>
-        <item>音乐舞蹈@panjichang@101</item>
-        <item>访谈演讲@panjichang@102</item>
-        <item>娱乐八卦@panjichang@103</item>
-        <item>恶搞配音@panjichang@104</item>
-        <item>搞笑@panjichang@105</item>
-        <item>吐槽@panjichang@106</item>
-        <item>体育@panjichang@107</item>
-        <item>汽车@panjichang@108</item>
-        <item>脱口秀@panjichang@109</item>
-        <item>生活@panjichang@110</item>
-        <item>动漫@panjichang@111</item>
-        <item>微电影@panjichang@112</item>
-        <item>记录片@panjichang@113</item>
+        <item>轻松学堂@chenpan@100</item>
+        <item>音乐舞蹈@chenpan@101</item>
+        <item>访谈演讲@chenpan@102</item>
+        <item>娱乐八卦@chenpan@103</item>
+        <item>恶搞配音@chenpan@104</item>
+        <item>搞笑@chenpan@105</item>
+        <item>吐槽@chenpan@106</item>
+        <item>体育@chenpan@107</item>
+        <item>汽车@chenpan@108</item>
+        <item>脱口秀@chenpan@109</item>
+        <item>生活@chenpan@110</item>
+        <item>动漫@chenpan@111</item>
+        <item>微电影@chenpan@112</item>
+        <item>记录片@chenpan@113</item>
     </array>
     <array name="text_tab">
-        <item>励志文章@panjichang@http://www.lz13.cn/lizhi/lizhiwenzhang.html</item>
-        <item>成功励志@panjichang@http://www.lz13.cn/lizhi/chenggonglizhi.html</item>
-        <item>励志故事@panjichang@http://www.lz13.cn/lizhi/lizhigushi.html</item>
-        <item>励志人物@panjichang@http://www.lz13.cn/lizhi/lizhirenwu.html</item>
-        <item>励志名言@panjichang@http://www.lz13.cn/lizhi/lizhimingyan.html</item>
-        <item>名人名言@panjichang@http://www.lz13.cn/lizhi/mingrenmingyan.html</item>
-        <item>励志电影@panjichang@http://www.lz13.cn/lizhi/lizhidianying.html</item>
-        <item>励志歌曲@panjichang@http://www.lz13.cn/lizhi/lizhigequ.html</item>
-        <item>人生感悟@panjichang@http://www.lz13.cn/lizhi/renshengganwu.html</item>
+        <item>励志文章@chenpan@http://www.lz13.cn/lizhi/lizhiwenzhang.html</item>
+        <item>成功励志@chenpan@http://www.lz13.cn/lizhi/chenggonglizhi.html</item>
+        <item>励志故事@chenpan@http://www.lz13.cn/lizhi/lizhigushi.html</item>
+        <item>励志人物@chenpan@http://www.lz13.cn/lizhi/lizhirenwu.html</item>
+        <item>励志名言@chenpan@http://www.lz13.cn/lizhi/lizhimingyan.html</item>
+        <item>名人名言@chenpan@http://www.lz13.cn/lizhi/mingrenmingyan.html</item>
+        <item>励志电影@chenpan@http://www.lz13.cn/lizhi/lizhidianying.html</item>
+        <item>励志歌曲@chenpan@http://www.lz13.cn/lizhi/lizhigequ.html</item>
+        <item>人生感悟@chenpan@http://www.lz13.cn/lizhi/renshengganwu.html</item>
 
-        <item>人生哲理@panjichang@http://www.lz13.cn/lizhi/zheli.html</item>
-        <item>经典语录@panjichang@http://www.lz13.cn/lizhi/jingdianyulu.html</item>
-        <item>经典句子@panjichang@http://www.lz13.cn/lizhi/jingdianyuduan.html</item>
-        <item>职场励志@panjichang@http://www.lz13.cn/lizhi/zhichanglizhi.html</item>
-        <item>励志创业@panjichang@http://www.lz13.cn/lizhi/lizhichuangye.html</item>
-        <item>青春励志@panjichang@http://www.lz13.cn/lizhi/qingchunlizhi.html</item>
+        <item>人生哲理@chenpan@http://www.lz13.cn/lizhi/zheli.html</item>
+        <item>经典语录@chenpan@http://www.lz13.cn/lizhi/jingdianyulu.html</item>
+        <item>经典句子@chenpan@http://www.lz13.cn/lizhi/jingdianyuduan.html</item>
+        <item>职场励志@chenpan@http://www.lz13.cn/lizhi/zhichanglizhi.html</item>
+        <item>励志创业@chenpan@http://www.lz13.cn/lizhi/lizhichuangye.html</item>
+        <item>青春励志@chenpan@http://www.lz13.cn/lizhi/qingchunlizhi.html</item>
 
-        <item>高三励志@panjichang@http://www.lz13.cn/lizhi/gaosanlizhi.html</item>
-        <item>为人处事@panjichang@http://www.lz13.cn/lizhi/weirenchushi.html</item>
-        <item>家庭教育@panjichang@http://www.lz13.cn/lizhi/jiatingjiaoyu.html</item>
-        <item>励志演讲@panjichang@http://www.lz13.cn/lizhi/lizhiyanjiang.html</item>
-        <item>感恩励志@panjichang@http://www.lz13.cn/lizhi/ganenlizhi.html</item>
-        <item>经典美文@panjichang@http://www.lz13.cn/lizhi/meiwen.html</item>
+        <item>高三励志@chenpan@http://www.lz13.cn/lizhi/gaosanlizhi.html</item>
+        <item>为人处事@chenpan@http://www.lz13.cn/lizhi/weirenchushi.html</item>
+        <item>家庭教育@chenpan@http://www.lz13.cn/lizhi/jiatingjiaoyu.html</item>
+        <item>励志演讲@chenpan@http://www.lz13.cn/lizhi/lizhiyanjiang.html</item>
+        <item>感恩励志@chenpan@http://www.lz13.cn/lizhi/ganenlizhi.html</item>
+        <item>经典美文@chenpan@http://www.lz13.cn/lizhi/meiwen.html</item>
 
-        <item>伤感日志@panjichang@http://www.lz13.cn/lizhi/shanggan.html</item>
-        <item>励志口号@panjichang@http://www.lz13.cn/lizhi/lizhikouhao.html</item>
-        <item>励志书籍@panjichang@http://www.lz13.cn/lizhi/lizhishuji.html</item>
-        <item>励志教育@panjichang@http://www.lz13.cn/lizhi/lizhijiaoyu.html</item>
+        <item>伤感日志@chenpan@http://www.lz13.cn/lizhi/shanggan.html</item>
+        <item>励志口号@chenpan@http://www.lz13.cn/lizhi/lizhikouhao.html</item>
+        <item>励志书籍@chenpan@http://www.lz13.cn/lizhi/lizhishuji.html</item>
+        <item>励志教育@chenpan@http://www.lz13.cn/lizhi/lizhijiaoyu.html</item>
 
-        <item>励志诗歌@panjichang@http://www.lz13.cn/lizhi/lizhishige.html</item>
-        <item>大学生励志@panjichang@http://www.lz13.cn/lizhi/daxueshenglizhi.html</item>
-        <item>励志奖学金@panjichang@http://www.lz13.cn/lizhi/lizhijiangxuejin.html</item>
+        <item>励志诗歌@chenpan@http://www.lz13.cn/lizhi/lizhishige.html</item>
+        <item>大学生励志@chenpan@http://www.lz13.cn/lizhi/daxueshenglizhi.html</item>
+        <item>励志奖学金@chenpan@http://www.lz13.cn/lizhi/lizhijiangxuejin.html</item>
+    </array>
+    <!--http://image.baidu.com/data/imgs?col=美女&tag=全部&pn=0&rn=20&from=1-->
+    <array name="Picture_tab">
+        <item>美女@chenpan@美女</item>
+        <item>明星@chenpan@明星</item>
+        <item>动漫@chenpan@动漫</item>
+        <item>摄影@chenpan@摄影</item>
+        <item>汽车@chenpan@汽车</item>
+       <!-- <item>美图美句@chenpan@http://www.juzimi.com/meitumeiju</item>
+        <item>手写美句@chenpan@http://www.juzimi.com/meitumeiju/shouxiemeiju</item>
+        <item>经典对白@chenpan@http://www.juzimi.com/meitumeiju/jingdianduibai</item>-->
+
+
     </array>
     <string name="title_activity_k">KActivity</string>
     <string name="title_activity_article">ArticleActivity</string>

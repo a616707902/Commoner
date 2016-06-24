@@ -58,7 +58,7 @@ public class PictureBaiduHolder extends BaseHolder<PictureBeanBaiDu> {
                 Intent intent=new Intent(mContext, ImagesDetailActivity.class);
                 intent.putExtras(extras);
                 mContext.startActivity(intent);
-                ((Activity) mContext).overridePendingTransition(0, 0);
+                ( ((Activity) mContext)).overridePendingTransition(0, 0);
             }
         });
     }

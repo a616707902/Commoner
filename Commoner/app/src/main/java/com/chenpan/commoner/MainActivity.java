@@ -238,5 +238,9 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         mTabLayout.setTabsFromPagerAdapter(adapter);
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
 }

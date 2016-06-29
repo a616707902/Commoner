@@ -24,15 +24,15 @@ public class PictureTabAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-       /* if (position > 5) {
+        if (position > 4) {
             PictureFragmentFromOther fragment = new PictureFragmentFromOther();
             fragment.setUrl(mTitles.get(position).split("@chenpan@")[1]);
             return fragment;
-        } else {*/
+        } else {
             PictureFragmentFormBaidu fragment = new PictureFragmentFormBaidu();
             fragment.setType(mTitles.get(position).split("@chenpan@")[1]);
             return fragment;
-//      /**/  }
+  }
 
     }
 

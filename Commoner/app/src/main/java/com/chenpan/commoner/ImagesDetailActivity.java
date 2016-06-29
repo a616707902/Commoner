@@ -17,7 +17,9 @@
 package com.chenpan.commoner;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chenpan.commoner.base.BaseActivity;
 import com.chenpan.commoner.mvp.presenter.ImageDetailPresenter;
@@ -26,6 +28,7 @@ import com.chenpan.commoner.widget.SmoothImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 
@@ -36,12 +39,20 @@ public class ImagesDetailActivity extends BaseActivity<ImageDetailView, ImageDet
     public static final String INTENT_IMAGE_Y_TAG = "INTENT_IMAGE_Y_TAG";
     public static final String INTENT_IMAGE_W_TAG = "INTENT_IMAGE_W_TAG";
     public static final String INTENT_IMAGE_H_TAG = "INTENT_IMAGE_H_TAG";
+    public static final String INTENT_CONTENT = "INTENT_CONTENT";
+    public static final String INTENT_CONTENT_SENER = "INTENT_CONTENT_SENER";
+    @Bind(R.id.tv_content)
+    TextView tvContent;
+    @Bind(R.id.tv_sender)
+    TextView tvSender;
 
     private String mImageUrl;
     private int mLocationX;
     private int mLocationY;
     private int mWidth;
     private int mHeight;
+    private String content;
+    private String sener;
 
     @Bind(R.id.images_detail_smooth_image)
     SmoothImageView mSmoothImageView;
@@ -77,7 +88,13 @@ public class ImagesDetailActivity extends BaseActivity<ImageDetailView, ImageDet
         mSmoothImageView.transformIn();
 
         ImageLoader.getInstance().displayImage(mImageUrl, mSmoothImageView);
-
+        if (TextUtils.isEmpty(content)) {
+            tvContent.setVisibility(View.INVISIBLE);
+            tvSender.setVisibility(View.INVISIBLE);
+        } else {
+            tvContent.setText(content);
+            tvSender.setText("——" + sener);
+        }
         mSmoothImageView.setOnTransformListener(new SmoothImageView.TransformListener() {
             @Override
             public void onTransformComplete(int mode) {
@@ -103,6 +120,8 @@ public class ImagesDetailActivity extends BaseActivity<ImageDetailView, ImageDet
         mLocationY = extras.getInt(INTENT_IMAGE_Y_TAG);
         mWidth = extras.getInt(INTENT_IMAGE_W_TAG);
         mHeight = extras.getInt(INTENT_IMAGE_H_TAG);
+        content = extras.getString(INTENT_CONTENT);
+        sener = extras.getString(INTENT_CONTENT_SENER);
     }
 
     @Override
@@ -114,4 +133,6 @@ public class ImagesDetailActivity extends BaseActivity<ImageDetailView, ImageDet
     public int getContentLayout() {
         return R.layout.activity_images_detail;
     }
+
+
 }

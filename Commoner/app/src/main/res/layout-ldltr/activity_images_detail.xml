@@ -15,13 +15,13 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent">
+    android:background="@android:color/black">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -30,10 +30,37 @@
         app:layout_scrollFlags="scroll|enterAlways"
         app:theme="@style/ToolbarTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
     <com.chenpan.commoner.widget.SmoothImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/images_detail_smooth_image"
+        android:layout_centerInParent="true"
         android:scaleType="fitCenter"/>
 
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_sender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:layout_marginRight="32dp"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="48dp"
+        android:textSize="15sp" />
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:ellipsize="end"
+        android:lineSpacingExtra="5dp"
+        android:layout_above="@id/tv_sender"
+        android:maxLines="3"
+        android:padding="16dp"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+</RelativeLayout>

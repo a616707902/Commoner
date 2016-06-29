@@ -21,6 +21,13 @@ private  String  BDurl="http://image.baidu.com/data/imgs";
     private  int MAX=20;
     PictureFramentModel pictureFramentModel=new IPictureFragmentBaiDuModel();
     public   void getPicture(Context context,String  tag, final Map<String ,String >  param){
+
+        if(!getWeakView().checkNet()){
+            getWeakView().onRefreshComplete();
+            getWeakView().onLoadMoreComplete();
+            getWeakView().showNoNet();
+            return;
+        }
         int page=Integer.valueOf(param.get("page"));
         StringBuilder url=new StringBuilder();
         url.append(BDurl).append("?col=").append(tag).append("&tag=全部").append("&pn=").append(MAX*page);

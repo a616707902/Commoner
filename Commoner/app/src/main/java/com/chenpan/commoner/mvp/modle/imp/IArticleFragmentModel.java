@@ -43,7 +43,7 @@ public class IArticleFragmentModel implements ArticleFragmentModel {
                     InputSource is = new InputSource(sr);*/
                  //  String resultSs= URLDecoder.decode(results, "UTF-8");
                     Entities.EscapeMode.base.getMap().clear();
-                    Document result= Jsoup.parse(results,"ISO-8859-1");
+                    Document result= Jsoup.parse(results);
 
                    // Document result = (Document) DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
                     Elements postHeads = result.getElementsByClass("PostHead");

@@ -32,5 +32,18 @@ public class ToastFactory {
 			toast.cancel();
 		}
 	}
+	private static Context sContext;
+
+	public static void init(Context context) {
+		sContext = context.getApplicationContext();
+	}
+
+	public static void show(int resId) {
+		Toast.makeText(sContext, resId, Toast.LENGTH_SHORT).show();
+	}
+
+	public static void show(String text) {
+		Toast.makeText(sContext, text, Toast.LENGTH_SHORT).show();
+	}
 
 }

@@ -15,5 +15,31 @@
     <color name="comment_text_color">#ff333333</color>
     <color name="textColor">#ff909090</color>
     <color name="actionbar_color">#ff607d8b</color>
+    <color name="music_player_sb_bg">#FFFFE4D9</color>
+    <color name="music_player_sb_progress_color">#FFE64626</color>
+    <color name="music_player_sb_secondary_progress_color">#FFE87F6A</color>
+    <color name="music_player_user_name_color">#FF1A7BE8</color>
+
+    <color name="player_container_bg">#FFDDDDDD</color>
+    <color name="sr_color_primary">#FF4E3E7F</color>
+    <color name="sr_color_primary_dark">#FF4E3E7F</color>
+    <color name="grey">#9E9E9E</color>
+    <color name="red">#F44336</color>
+    <color name="translucent_grey">#809E9E9E</color>
+    <color name="translucent_white">#80FFFFFF</color>
+    <color name="black">@android:color/black</color>
+    <color name="translucent_white_96p">#F5FFFFFF</color>
+    <color name="translucent_grey_300_96p">#F5E0E0E0</color>
+    <color name="translucent_grey_900_96p">#F5212121</color>
+    <color name="translucent_grey_700_96p">#F5616161</color>
+    <color name="translucent_black">#80000000</color>
+    <color name="translucent_white_8p">#14FFFFFF</color>
+
+    <color name="blue">#2196F3</color>
+    <color name="grey_900">#212121</color>
+    <color name="translucent_white_16p">#29FFFFFF</color>
+    <color name="translucent_white_24p">#3DFFFFFF</color>
+
+
 
 </resources>

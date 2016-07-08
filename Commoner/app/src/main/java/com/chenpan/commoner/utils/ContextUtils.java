@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.chenpan.commoner.base.MyApplication;
+
 /**
  * Created by sysadminl on 2015/11/10.
  */
@@ -13,7 +15,6 @@ public class ContextUtils {
      * 将px值转换为sp值，保证文字大小不变
      *
      * @param pxValue
-     * @param fontScale
      *            （DisplayMetrics类中属性scaledDensity）
      * @return
      */
@@ -33,7 +34,6 @@ public class ContextUtils {
      * 将sp值转换为px值，保证文字大小不变
      *
      * @param spValue
-     * @param fontScale
      *            （DisplayMetrics类中属性scaledDensity）
      * @return
      */
@@ -68,5 +68,40 @@ public class ContextUtils {
     public static int getSreenHeight(Context context){
         WindowManager wm=(WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
         return wm.getDefaultDisplay().getHeight();
+    }
+
+    public static int getScreenWidth() {
+        WindowManager wm = (WindowManager) MyApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+        return wm.getDefaultDisplay().getWidth();
+    }
+
+    /**
+     * 获取状态栏高度
+     */
+    public static int getSystemBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    public static int dp2px(float dpValue) {
+        Context context = MyApplication.getInstance().getApplicationContext();
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    public static int px2dp(float pxValue) {
+        Context context = MyApplication.getInstance().getApplicationContext();
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+    public static int sp2px(float spValue) {
+        Context context = MyApplication.getInstance().getApplicationContext();
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
     }
 }

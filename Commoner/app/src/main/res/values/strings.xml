@@ -92,7 +92,34 @@
 
 
     </array>
+    <array name="Music_tab">
+        <item>本地音乐@chenpan@本地音乐</item>
+        <item>在线音乐@chenpan@在线音乐</item>
+
+
+    </array>
     <string name="title_activity_k">KActivity</string>
     <string name="title_activity_article">ArticleActivity</string>
     <string name="title_activity_photo">PhotoActivity</string>
+    <string name="title_activity_music_main">MusicMainActivity</string>
+
+    <string name="no_local_music">暂无本地音乐</string>
+    <string name="song_list_item_title_1">1.%1$s - %2$s</string>
+    <string name="song_list_item_title_2">2.%1$s - %2$s</string>
+    <string name="song_list_item_title_3">3.%1$s - %2$s</string>
+    <string name="mode_loop">列表循环</string>
+    <string name="mode_shuffle">随机播放</string>
+    <string name="mode_one">单曲循环</string>
+    <string name="play_time_start">00:00</string>
+    <string name="now_play">正在播放：%s</string>
+    <string name="now_download">正在下载：%s</string>
+    <string name="download_success">%s下载完成</string>
+    <string name="recent_update">最近更新：%s</string>
+    <string name="unable_to_play">暂时无法播放</string>
+    <string name="unable_to_download">暂时无法下载</string>
+    <string name="unable_to_share">暂时无法分享</string>
+    <string name="unknown">未知</string>
+    <string name="setting_key_mobile_network_play">mobile_network_play</string>
+    <string name="setting_key_mobile_network_download">mobile_network_download</string>
+    <string name="setting_key_sound_effect">sound_effect</string>
 </resources>

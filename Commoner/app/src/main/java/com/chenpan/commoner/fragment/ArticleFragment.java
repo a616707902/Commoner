@@ -93,8 +93,8 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (canLoadMore);
-                   ArticleFragment.this.onScrolled(recyclerView, dx, dy);
+                if (canLoadMore) ;
+                ArticleFragment.this.onScrolled(recyclerView, dx, dy);
             }
         });
 
@@ -204,7 +204,7 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
 
     }
     private void loadPage() {
-        params.put("url", url.replace(".html", "-" + (++page) + ".html"));
+        params.put("url", url.replace(".html", "_" + (++page) + ".html"));
         params.put("page", String.valueOf(page));
         mPresenter.getArticleList(getActivity(), url,url, params);
     }

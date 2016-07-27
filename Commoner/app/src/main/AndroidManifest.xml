@@ -34,7 +34,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,6 +52,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ImagesDetailActivity"
+            android:label="@string/title_activity_photo"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".OnlineMusicActivity"
             android:label="@string/title_activity_photo"
             android:theme="@style/AppTheme.NoActionBar" />
 

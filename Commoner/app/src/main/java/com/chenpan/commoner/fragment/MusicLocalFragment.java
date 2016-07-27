@@ -18,6 +18,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -76,7 +77,7 @@ public class MusicLocalFragment extends BaseFragment<IMusicLocalView, MusicLocal
                 final Music music = PlayService.getMusicList().get(position);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                 dialog.setTitle(music.getTitle());
-                int itemsId = position ==mPlayService.getPlayingPosition() ? R.array.local_music_dialog_without_delete : R.array.local_music_dialog;
+                int itemsId = position == mPlayService.getPlayingPosition() ? R.array.local_music_dialog_without_delete : R.array.local_music_dialog;
                 dialog.setItems(itemsId, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -103,6 +104,15 @@ public class MusicLocalFragment extends BaseFragment<IMusicLocalView, MusicLocal
         if (mPlayService.getPlayingMusic() != null && mPlayService.getPlayingMusic().getType() == Music.Type.LOCAL) {
             lvLocalMusic.setSelection(mPlayService.getPlayingPosition());
         }
+        lvLocalMusic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                getPlayService().play(position);
+                mAdapter.updatePlayingPosition(getPlayService());
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
         updateView();
         IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
         getActivity().registerReceiver(mDownloadReceiver, filter);

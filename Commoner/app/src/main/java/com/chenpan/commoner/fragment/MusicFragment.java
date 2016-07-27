@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.chenpan.commoner.MainActivity;
 import com.chenpan.commoner.R;
 import com.chenpan.commoner.adapter.PlayPagerAdapter;
 import com.chenpan.commoner.base.BaseFragment;
@@ -449,7 +450,7 @@ private  SeekBar.OnSeekBarChangeListener seekBarChangeListener=new SeekBar.OnSee
         super.onDestroy();
     }
     private void onBackPressed() {
-        getActivity().onBackPressed();
-        ivBack.setEnabled(false);
+        ((MainActivity)getActivity()).hidePlayingFragment();
+       // ivBack.setEnabled(false);
     }
 }

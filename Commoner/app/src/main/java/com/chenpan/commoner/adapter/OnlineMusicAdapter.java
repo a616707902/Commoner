@@ -1,6 +1,5 @@
 package com.chenpan.commoner.adapter;
 
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,31 +8,37 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chenpan.commoner.R;
-import com.chenpan.commoner.bean.Music;
-import com.chenpan.commoner.service.PlayService;
-import com.chenpan.commoner.utils.CoverLoader;
+import com.chenpan.commoner.bean.JOnlineMusic;
 import com.chenpan.commoner.utils.FileUtils;
+import com.chenpan.commoner.utils.ImageUtils;
 import com.chenpan.commoner.utils.OnMoreClickListener;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * 本地音乐列表适配器
- * Created by wcy on 2015/11/27.
+ * 在线音乐列表适配器
+ * Created by wcy on 2015/12/22.
  */
-public class LocalMusicAdapter extends BaseAdapter {
+public class OnlineMusicAdapter extends BaseAdapter {
+    private List<JOnlineMusic> mData;
     private OnMoreClickListener mListener;
-    private int mPlayingPosition;
+
+    public OnlineMusicAdapter(List<JOnlineMusic> data) {
+        this.mData = data;
+    }
 
     @Override
     public int getCount() {
-        return PlayService.getMusicList().size();
+        return mData.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return PlayService.getMusicList().get(position);
+        return mData.get(position);
     }
 
     @Override
@@ -51,23 +56,15 @@ public class LocalMusicAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        if (position == mPlayingPosition) {
-            holder.vPlaying.setVisibility(View.VISIBLE);
-        } else {
-            holder.vPlaying.setVisibility(View.INVISIBLE);
-        }
-        final Music music = PlayService.getMusicList().get(position);
-        Bitmap cover = CoverLoader.getInstance().loadThumbnail(music.getCoverUri());
-        holder.ivCover.setImageBitmap(cover);
-        holder.tvTitle.setText(music.getTitle());
-        String artist = FileUtils.getArtistAndAlbum(music.getArtist(), music.getAlbum());
+        JOnlineMusic jOnlineMusic = mData.get(position);
+        ImageLoader.getInstance().displayImage(jOnlineMusic.getPic_small(), holder.ivCover, ImageUtils.getCoverDisplayOptions());
+        holder.tvTitle.setText(jOnlineMusic.getTitle());
+        String artist = FileUtils.getArtistAndAlbum(jOnlineMusic.getArtist_name(), jOnlineMusic.getAlbum_title());
         holder.tvArtist.setText(artist);
         holder.ivMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mListener != null) {
-                    mListener.onMoreClick(position);
-                }
+                mListener.onMoreClick(position);
             }
         });
         holder.vDivider.setVisibility(isShowDivider(position) ? View.VISIBLE : View.GONE);
@@ -75,15 +72,7 @@ public class LocalMusicAdapter extends BaseAdapter {
     }
 
     private boolean isShowDivider(int position) {
-        return position != PlayService.getMusicList().size() - 1;
-    }
-
-    public void updatePlayingPosition(PlayService playService) {
-        if (playService.getPlayingMusic() != null && playService.getPlayingMusic().getType() == Music.Type.LOCAL) {
-            mPlayingPosition = playService.getPlayingPosition();
-        } else {
-            mPlayingPosition = -1;
-        }
+        return position != mData.size() - 1;
     }
 
     public void setOnMoreClickListener(OnMoreClickListener listener) {
@@ -91,8 +80,6 @@ public class LocalMusicAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        @Bind(R.id.v_playing)
-        View vPlaying;
         @Bind(R.id.iv_cover)
         ImageView ivCover;
         @Bind(R.id.tv_title)

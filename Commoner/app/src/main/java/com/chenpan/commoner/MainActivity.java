@@ -6,13 +6,11 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -31,7 +29,6 @@ import com.chenpan.commoner.bean.UserManager;
 import com.chenpan.commoner.fragment.MusicFragment;
 import com.chenpan.commoner.mvp.presenter.MainPresenter;
 import com.chenpan.commoner.mvp.view.MainView;
-import com.chenpan.commoner.receiver.RemoteControlReceiver;
 import com.chenpan.commoner.service.OnPlayerEventListener;
 import com.chenpan.commoner.service.PlayService;
 import com.chenpan.commoner.utils.CoverLoader;
@@ -53,7 +50,6 @@ import com.example.chenpan.library.util.RecyclerViewCacheUtil;
 import java.util.Arrays;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity<MainView, MainPresenter> implements MainView, OnPlayerEventListener, View.OnClickListener {
 
@@ -77,6 +73,8 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     ProgressBar pbPlayBar;
     @Bind(R.id.fl_play_bar)
     FrameLayout flPlayBar;
+    @Bind(R.id.tabs)
+    TabLayout tabs;
 
 
     private boolean ISPLAYING = false;
@@ -126,8 +124,8 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
+        boolean istrue = checkService();
         bindService();
-
         setLisner();
         setupTextViewPager();
 //        setupPictureViewPager();
@@ -233,6 +231,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         ivPlayBarPlay.setOnClickListener(this);
         ivPlayBarNext.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -373,11 +372,23 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         }
     };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        parseIntent(getIntent());
+    }
 
     private void parseIntent(Intent intent) {
+        boolean s = intent.getBooleanExtra(Extras.FROM_NOTIFICATION, false);
         if (intent.hasExtra(Extras.FROM_NOTIFICATION)) {
             showPlayingFragment();
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        parseIntent(intent);
+        super.onNewIntent(intent);
     }
 
     private void showPlayingFragment() {
@@ -389,7 +400,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         } else {
             ft.show(mPlayFragment);
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
         isPlayFragmentShow = true;
     }
 
@@ -485,11 +496,6 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         if (result != null && result.isDrawerOpen()) {
             result.closeDrawer();
         } else {
-            super.onBackPressed();
-        }
-        if (BuildConfig.DEBUG) {
-            super.onBackPressed();
-        } else {
             moveTaskToBack(false);
         }
     }
@@ -497,12 +503,13 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     /**
      * 隐藏音乐播放界面
      */
-    private void hidePlayingFragment() {
+    public void hidePlayingFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.setCustomAnimations(0, R.anim.fragment_slide_down);
         ft.hide(mPlayFragment);
         ft.commit();
         isPlayFragmentShow = false;
     }
+
 
 }

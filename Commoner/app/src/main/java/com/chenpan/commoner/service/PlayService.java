@@ -35,7 +35,7 @@ import java.util.Random;
  */
 public class PlayService extends Service implements MediaPlayer.OnCompletionListener, AudioManager.OnAudioFocusChangeListener {
     private static final int NOTIFICATION_ID = 0x111;
-    private static final boolean ISPLAYING = false;
+   // private static final boolean ISPLAYING = false;
     private static final long TIME_UPDATE = 100L;
     // 本地歌曲列表
     private static final List<Music> sMusicList = new ArrayList<>();

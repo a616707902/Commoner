@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.gson.JsonObject;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -13,6 +14,7 @@ import org.xmlpull.v1.XmlPullParser;
 public abstract class VolleyXmlInterface {
     private Context context;
     public static Response.Listener<XmlPullParser> mXMLListener;
+    public static Response.Listener<JsonObject> jsonListener;
     public static Response.ErrorListener mErrorListener;
     public VolleyXmlInterface() {
     }

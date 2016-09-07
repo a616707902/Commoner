@@ -67,6 +67,7 @@ public class ArticleActivity extends BaseActivity<ArticleView, ArticlePresenter>
         getSupportActionBar().setTitle(mArticle.title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(false);
+      //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
     }
 

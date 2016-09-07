@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chenpan.commoner.ArticleActivity;
+import com.chenpan.commoner.MainActivity;
 import com.chenpan.commoner.R;
 import com.chenpan.commoner.bean.ArticleBean;
 
@@ -38,6 +39,7 @@ public class ArticleHolder extends BaseHolder<ArticleBean> {
                 Intent intent=new Intent(mContext, ArticleActivity.class);
                 intent.putExtra("article", mData);
                 mContext.startActivity(intent);
+                ((MainActivity)mContext). overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
             }
         });
     }

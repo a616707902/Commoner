@@ -16,6 +16,7 @@
     <string name="article">文章</string>
     <string name="setting">设置</string>
     <string name="music">音乐</string>
+    <string name="skinchange">主题换肤</string>
     <string name="loading">loading</string>
     <string name="tips">温馨提示</string>
     <string name="play_tips">当前处于移动网络，确定打开移动网络播放开关吗？</string>
@@ -130,4 +131,5 @@
     <string name="setting_key_mobile_network_play">mobile_network_play</string>
     <string name="setting_key_mobile_network_download">mobile_network_download</string>
     <string name="setting_key_sound_effect">sound_effect</string>
+    <string name="title_activity_skin">SkinActivity</string>
 </resources>

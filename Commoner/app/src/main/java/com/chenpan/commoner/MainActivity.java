@@ -7,9 +7,11 @@ import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -73,8 +75,6 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     ProgressBar pbPlayBar;
     @Bind(R.id.fl_play_bar)
     FrameLayout flPlayBar;
-    @Bind(R.id.tabs)
-    TabLayout tabs;
 
 
     private boolean ISPLAYING = false;
@@ -103,9 +103,37 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     private int dId = 1;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        parseIntent(getIntent());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //  overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (result != null && result.isDrawerOpen()) {
+            result.closeDrawer();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        unbindService(mPlayServiceConnection);
+        super.onDestroy();
+    }
+
+
+    @Override
     public void showLogin() {
 
     }
+
 
     @Override
     public void setUserInfo(User user) {
@@ -166,7 +194,8 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                         new PrimaryDrawerItem().withName(R.string.video).withIcon(R.drawable.videoicon).withIdentifier(3).withSelectable(true),
                         new PrimaryDrawerItem().withName(R.string.music).withIcon(R.drawable.musicicon).withIdentifier(4).withSelectable(true),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(R.string.setting).withIcon(R.drawable.settingicon).withIdentifier(6).withSelectable(false)
+                        new PrimaryDrawerItem().withName(R.string.skinchange).withIcon(R.drawable.skin).withIdentifier(6).withSelectable(true),
+                        new PrimaryDrawerItem().withName(R.string.setting).withIcon(R.drawable.settingicon).withIdentifier(7).withSelectable(false)
 
                 ) // add the items we want to use with our Drawer
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -198,7 +227,11 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                                 mViewPager.removeAllViews();
                                 setupMusicViewPager();
                                 //                intent = new Intent(MainActivity.this, SmallGameActivity.class);
-                            } else if (drawerItem.getIdentifier() == 5) {
+                            } else if (drawerItem.getIdentifier() == 6) {
+                                intent = new Intent(MainActivity.this, SkinActivity.class);
+                                MainActivity.this.startActivity(intent);
+                                return true;
+                            } else if (drawerItem.getIdentifier() == 7) {
                                 //  intent = new Intent(MainActivity.this, SettingActivity.class);
                                 MainActivity.this.startActivity(intent);
                                 return true;
@@ -213,6 +246,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                 .withSavedInstance(savedInstanceState)
                 .withShowDrawerOnFirstLaunch(true)
                 .build();
+        setActionBar();
         RecyclerViewCacheUtil.getInstance().withCacheSize(2).init(result);
         if (savedInstanceState == null) {
             // result.setSelection(1, false);
@@ -220,7 +254,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
             //set the active profile
             headerResult.setActiveProfile(profile);
         }
-        result.updateBadge(5, new StringHolder(10 + ""));
+        result.updateBadge(7, new StringHolder(10 + ""));
     }
 
     private void setLisner() {
@@ -249,6 +283,11 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     }
 
     @Override
+    public void setActionBar() {
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer_home);
+    }
+
+    @Override
     public int getContentLayout() {
         return R.layout.activity_main;
     }
@@ -268,21 +307,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         return true;
     }
 
-    @Override
-    protected void onDestroy() {
-        unbindService(mPlayServiceConnection);
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (result != null && result.isDrawerOpen()) {
-            result.closeDrawer();
-        }
-    }
-
-   /* private void setupVideoViewPager() {
+    /* private void setupVideoViewPager() {
         String[] titles = getResources().getStringArray(R.array.video_tab);
         VideoTabAdapter adapter =
                 new VideoTabAdapter(getSupportFragmentManager(), Arrays.asList(titles));
@@ -299,12 +324,12 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
             flPlayBar.setVisibility(View.GONE);
         }
         String[] titles = getResources().getStringArray(R.array.text_tab);
-        ArticleTabAdapter adapter =
-                new ArticleTabAdapter(getSupportFragmentManager(), Arrays.asList(titles));
-
-        mViewPager.setAdapter(adapter);
+        // ArticleTabAdapter adapter =
+        mAdapter = new ArticleTabAdapter(getSupportFragmentManager(), Arrays.asList(titles));
+        new SetAdapterTask().execute();
+        /*mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setTabsFromPagerAdapter(adapter);
+        mTabLayout.setTabsFromPagerAdapter(adapter);*/
     }
 
     private void setupPictureViewPager() {
@@ -315,34 +340,48 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         }
         mTabLayout.removeAllTabs();
         String[] titles = getResources().getStringArray(R.array.Picture_tab);
-        PictureTabAdapter adapter =
+        mAdapter =
                 new PictureTabAdapter(getSupportFragmentManager(), Arrays.asList(titles));
-
-        mViewPager.setAdapter(adapter);
+        new SetAdapterTask().execute();
+      /*  mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setTabsFromPagerAdapter(adapter);
+        mTabLayout.setTabsFromPagerAdapter(adapter);*/
     }
 
     private void setupMusicViewPager() {
         flPlayBar.setVisibility(View.VISIBLE);
         mTabLayout.removeAllTabs();
         String[] titles = getResources().getStringArray(R.array.Music_tab);
-        MusicTabAdapter adapter =
+       /* MusicTabAdapter adapter =
+                new MusicTabAdapter(getSupportFragmentManager(), Arrays.asList(titles));*/
+        mAdapter =
                 new MusicTabAdapter(getSupportFragmentManager(), Arrays.asList(titles));
-
-        mViewPager.setAdapter(adapter);
+        new SetAdapterTask().execute();
+       /* mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setTabsFromPagerAdapter(adapter);
+        mTabLayout.setTabsFromPagerAdapter(adapter);*/
+    }
+
+    private FragmentStatePagerAdapter mAdapter;
+
+    private class SetAdapterTask extends AsyncTask<Void, Void, Void> {
+        protected Void doInBackground(Void... params) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+            if (mAdapter != null) {
+                mViewPager.setAdapter(mAdapter);
+                mTabLayout.setupWithViewPager(mViewPager);
+                mTabLayout.setTabsFromPagerAdapter(mAdapter);
+            }
+        }
     }
 
     public PlayService getPlayService() {
         return mPlayService;
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        overridePendingTransition(0, 0);
     }
 
     public void bindService() {
@@ -362,7 +401,6 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                 mPresenter.setAudioManger();
                 onChange(mPlayService.getPlayingMusic());
                 parseIntent(getIntent());
-                //  parseIntent(getIntent());
             }
         }
 
@@ -371,12 +409,6 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
         }
     };
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        parseIntent(getIntent());
-    }
 
     private void parseIntent(Intent intent) {
         boolean s = intent.getBooleanExtra(Extras.FROM_NOTIFICATION, false);

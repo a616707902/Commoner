@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,15 @@ import android.view.WindowManager;
 import com.chenpan.commoner.R;
 import com.chenpan.commoner.base.pbase.BasePresenter;
 import com.chenpan.commoner.utils.ContextUtils;
-import com.chenpan.commoner.utils.SystemBarTintManager;
+import com.example.chenpan.library.skinmanager.entity.DynamicAttr;
+import com.example.chenpan.library.skinmanager.listener.IDynamicNewView;
+import com.example.chenpan.library.skinmanager.listener.ISkinUpdate;
+import com.example.chenpan.library.skinmanager.loader.SkinInflaterFactory;
+import com.example.chenpan.library.skinmanager.loader.SkinManager;
+import com.example.chenpan.library.skinmanager.loader.StatusBarBackground;
+import com.example.chenpan.library.skinmanager.loader.SystemBarTintManager;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -22,7 +31,7 @@ import butterknife.ButterKnife;
  * V,T未指定类型，这里我们让子类去定义
  * Created by Administrator on 2016/5/24.
  */
-public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity implements IBase{
+public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity implements IBase,ISkinUpdate, IDynamicNewView {
     public T mPresenter;
     /**
      * 主线程
@@ -38,12 +47,24 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     private SystemBarTintManager tintManager;
 
     private View mRootView;
+    /**
+     * Whether response to skin changing after create
+     */
+    private boolean isResponseOnSkinChanging = true;
+
+    private SkinInflaterFactory mSkinInflaterFactory;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        mSkinInflaterFactory = new SkinInflaterFactory();
+        getLayoutInflater().setFactory(mSkinInflaterFactory);
         super.onCreate(savedInstanceState);
+
         AppManager.getAppManager().addActivity(this);
-        initWindow();
+
+        changeStatusColor();
+     //  initWindow();
         getIntentValue();
         mRootView = createView(null, null, savedInstanceState);
         setContentView(mRootView);
@@ -55,6 +76,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         mToolbar = (Toolbar) findViewById(getToolBarId());
         setSupportActionBar(mToolbar);//这里要用到主题必须是隐藏了action的
         setActionBar();
+
         bindViewAndAction(savedInstanceState);
     }
 
@@ -108,6 +130,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         //解除关联
         mPresenter.detachView((V) this);
         AppManager.getAppManager().finishActivity(this);//弹出栈
+        SkinManager.getInstance().detach(this);
+        mSkinInflaterFactory.clean();
         super.onDestroy();
     }
 
@@ -131,7 +155,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
      * @return
      */
     protected boolean isSetStatusBar() {
-        return false;
+        return true;
     }
 
     /**
@@ -146,5 +170,54 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     }
     public Toolbar getToolbar() {
         return mToolbar;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SkinManager.getInstance().attach(this);
+    }
+
+    /**
+     * dynamic add a skin view
+     *
+     * @param view
+     * @param attrName
+     * @param attrValueResId
+     */
+    protected void dynamicAddSkinEnableView(View view, String attrName, int attrValueResId){
+        mSkinInflaterFactory.dynamicAddSkinEnableView(this, view, attrName, attrValueResId);
+    }
+
+    protected void dynamicAddSkinEnableView(View view, List<DynamicAttr> pDAttrs){
+        mSkinInflaterFactory.dynamicAddSkinEnableView(this, view, pDAttrs);
+    }
+
+    final protected void enableResponseOnSkinChanging(boolean enable){
+        isResponseOnSkinChanging = enable;
+    }
+
+    @Override
+    public void onThemeUpdate() {
+        if(!isResponseOnSkinChanging){
+            return;
+        }
+        mSkinInflaterFactory.applySkin();
+        changeStatusColor();
+    }
+    public void changeStatusColor() {
+        //如果当前的Android系统版本大于4.4则更改状态栏颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Log.i("SkinBaseActivity", "changeStatus");
+            int color = SkinManager.getInstance().getColorPrimaryDark();
+            StatusBarBackground statusBarBackground = new StatusBarBackground(
+                    this, color);
+            if (color != -1)
+                statusBarBackground.setStatusBarbackColor();
+        }
+    }
+    @Override
+    public void dynamicAddView(View view, List<DynamicAttr> pDAttrs) {
+        mSkinInflaterFactory.dynamicAddSkinEnableView(this, view, pDAttrs);
     }
 }

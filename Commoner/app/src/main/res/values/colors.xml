@@ -39,7 +39,7 @@
     <color name="grey_900">#212121</color>
     <color name="translucent_white_16p">#29FFFFFF</color>
     <color name="translucent_white_24p">#3DFFFFFF</color>
+    <color name="windowBackground">#fafafa</color>
 
-
-
+    <color name="tab_line">#2196F3</color>
 </resources>

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,7 @@ import android.view.ViewGroup;
 import com.chenpan.commoner.MainActivity;
 import com.chenpan.commoner.base.pbase.BasePresenter;
 import com.chenpan.commoner.service.PlayService;
-import com.example.chenpan.library.skinmanager.entity.DynamicAttr;
-import com.example.chenpan.library.skinmanager.listener.IDynamicNewView;
-
-import java.util.List;
+import com.chenpan.skinlibrary.base.SkinBaseFragment;
 
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
@@ -23,7 +19,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by Administrator on 2016/6/2.
  */
-public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragment implements IBase  , IDynamicNewView{
+public abstract class BaseFragment<V, T extends BasePresenter<V>> extends SkinBaseFragment implements IBase {
     protected T mPresenter;
     protected Context mContext;
 
@@ -35,7 +31,6 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
      */
     protected static String TAG_LOG = null;
 
-    private IDynamicNewView mIDynamicNewView;
 
     @Override
     public void onAttach(Activity activity) {
@@ -44,23 +39,6 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
             mPlayService = ((MainActivity) activity).getPlayService();
         }
 
-    }
-    @Override
-    public void dynamicAddView(View view, List<DynamicAttr> pDAttrs) {
-        if(mIDynamicNewView == null){
-            throw new RuntimeException("IDynamicNewView should be implements !");
-        }else{
-            mIDynamicNewView.dynamicAddView(view, pDAttrs);
-        }
-    }
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try{
-            mIDynamicNewView = (IDynamicNewView)context;
-        }catch(ClassCastException e){
-            mIDynamicNewView = null;
-        }
     }
 
     @Override

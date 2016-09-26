@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/red_skin" />
+            <option value="$PROJECT_DIR$/skinlibrary" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -10,7 +10,6 @@ import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v7.internal.widget.ViewUtils;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -30,7 +29,6 @@ import com.chenpan.commoner.bean.Music;
 import com.chenpan.commoner.bean.SongListInfo;
 import com.chenpan.commoner.mvp.presenter.OnlineMusicPresenter;
 import com.chenpan.commoner.mvp.view.OnlineMusicView;
-import com.chenpan.commoner.network.JsonCallback;
 import com.chenpan.commoner.network.NetWorkUtil;
 import com.chenpan.commoner.playmusic.DownloadOnlineMusic;
 import com.chenpan.commoner.playmusic.PlayOnlineMusic;
@@ -49,14 +47,12 @@ import com.chenpan.commoner.widget.load.OnRetryListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import okhttp3.Call;
 
 public class OnlineMusicActivity extends BaseActivity<OnlineMusicView, OnlineMusicPresenter> implements OnlineMusicView {

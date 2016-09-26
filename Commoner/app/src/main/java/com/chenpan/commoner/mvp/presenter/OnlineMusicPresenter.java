@@ -1,19 +1,14 @@
 package com.chenpan.commoner.mvp.presenter;
 
-import android.support.v7.internal.widget.ViewUtils;
 
 import com.chenpan.commoner.base.pbase.BasePresenter;
 import com.chenpan.commoner.bean.Constants;
-import com.chenpan.commoner.bean.JOnlineMusic;
 import com.chenpan.commoner.bean.JOnlineMusicList;
 import com.chenpan.commoner.mvp.modle.OnlineMusicModel;
 import com.chenpan.commoner.mvp.modle.imp.IOnlineMusicModel;
 import com.chenpan.commoner.mvp.view.OnlineMusicView;
-import com.google.gson.Gson;
-import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

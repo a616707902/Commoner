@@ -2,8 +2,8 @@ package com.chenpan.commoner.mvp.modle.imp;
 
 
 import com.chenpan.commoner.mvp.modle.SkinModel;
-import com.example.chenpan.library.skinmanager.listener.ILoaderListener;
-import com.example.chenpan.library.skinmanager.loader.SkinManager;
+import com.chenpan.skinlibrary.listener.ILoaderListener;
+import com.chenpan.skinlibrary.load.SkinManager;
 
 import java.io.File;
 

@@ -38,7 +38,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SkinBa
 
         AppManager.getAppManager().addActivity(this);
 
-        changeStatusColor();
      //  initWindow();
         getIntentValue();
         mRootView = createView(null, null, savedInstanceState);
@@ -51,6 +50,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SkinBa
         mToolbar = (Toolbar) findViewById(getToolBarId());
         setSupportActionBar(mToolbar);//这里要用到主题必须是隐藏了action的
         setActionBar();
+      // dynamicAddSkinEnableView(mToolbar, "background", R.color.colorPrimary);
 
         bindViewAndAction(savedInstanceState);
     }

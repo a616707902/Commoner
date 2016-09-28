@@ -12,7 +12,6 @@ import com.chenpan.commoner.mvp.view.SkinView;
 import com.chenpan.commoner.utils.ToastFactory;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class SkinActivity extends BaseActivity<SkinView, SkinPresenter> implements SkinView {
 
@@ -87,6 +86,7 @@ public class SkinActivity extends BaseActivity<SkinView, SkinPresenter> implemen
     @Override
     public void showSucceed() {
         ToastFactory.show("切换成功");
+        //dynamicAddSkinEnableView(toolbar, "background", R.color.colorPrimary);
     }
 
     @Override

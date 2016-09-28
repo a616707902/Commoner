@@ -48,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
                 android:text="默认蓝"
                 android:textColor="#696969"
                 android:textSize="18sp" />
@@ -72,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="青春绿"
+                android:layout_gravity="center_horizontal"
                 android:textColor="#696969"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -94,6 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
                 android:text="高贵棕"
                 android:textColor="#696969"
                 android:textSize="18sp" />
@@ -128,6 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="酷炫黑"
+                android:layout_gravity="center_horizontal"
                 android:textColor="#696969"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -151,6 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="灿烂红"
+                android:layout_gravity="center_horizontal"
                 android:textColor="#696969"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -174,6 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="怀旧黄"
+                android:layout_gravity="center_horizontal"
                 android:textColor="#696969"
                 android:textSize="18sp" />
         </LinearLayout>

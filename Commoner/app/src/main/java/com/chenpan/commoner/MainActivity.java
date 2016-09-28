@@ -150,12 +150,14 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     }
 
+
     @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
         boolean istrue = checkService();
         bindService();
         setLisner();
         setupTextViewPager();
+
 //        setupPictureViewPager();
         if (UserManager.getInstance().isLogin()) {
             profile = new ProfileDrawerItem().withName(UserManager.getInstance().getUser().screen_name).withIcon(Uri.parse(UserManager.getInstance().getUser().profile_image_url)).withIdentifier(100);
@@ -194,7 +196,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                         new PrimaryDrawerItem().withName(R.string.video).withIcon(R.drawable.videoicon).withIdentifier(3).withSelectable(true),
                         new PrimaryDrawerItem().withName(R.string.music).withIcon(R.drawable.musicicon).withIdentifier(4).withSelectable(true),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(R.string.skinchange).withIcon(R.drawable.skin).withIdentifier(6).withSelectable(true),
+                        new PrimaryDrawerItem().withName(R.string.skinchange).withIcon(R.drawable.skin).withIdentifier(6).withSelectable(false),
                         new PrimaryDrawerItem().withName(R.string.setting).withIcon(R.drawable.settingicon).withIdentifier(7).withSelectable(false)
 
                 ) // add the items we want to use with our Drawer

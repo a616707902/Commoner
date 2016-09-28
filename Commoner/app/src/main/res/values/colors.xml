@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-        <!--导航栏颜色-->
-        <color name="toolbar_color">#3F51B5</color>
-        <color name="default_image_background">#FFDEDEDE</color>
+    <!--导航栏颜色-->
+    <color name="toolbar_color">#3F51B5</color>
+    <color name="default_image_background">#FFDEDEDE</color>
     <color name="divider">#FF18AA8D</color>
     <color name="text_color">#aaB2B2B2</color>
 

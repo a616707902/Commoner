@@ -62,7 +62,6 @@ public class SkinBaseActivity extends AppCompatActivity implements ISkinUpdate, 
         }
         mSkinInflaterFactory.applySkin();
         changeStatusColor();
-
 //        //设置window的背景色
 //        Drawable drawable = new ColorDrawable(SkinManager.getInstance().getColorPrimaryDark());
 //        getWindow().setBackgroundDrawable(drawable);

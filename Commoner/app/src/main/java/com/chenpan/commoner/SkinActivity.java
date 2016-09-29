@@ -42,6 +42,11 @@ public class SkinActivity extends BaseActivity<SkinView, SkinPresenter> implemen
     }
 
     @Override
+    public boolean isSetStatusBar() {
+        return false;
+    }
+
+    @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
         llRed.setOnClickListener(new View.OnClickListener() {
             @Override

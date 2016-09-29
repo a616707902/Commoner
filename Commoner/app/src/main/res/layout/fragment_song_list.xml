@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    >
     <ListView
         android:id="@+id/lv_song_list"
         android:layout_width="match_parent"
@@ -10,7 +10,7 @@
         android:clipToPadding="false"
         android:divider="@null"
         android:visibility="gone"
-        android:paddingBottom="@dimen/play_bar_height" />
+        android:layout_marginBottom="@dimen/play_bar_height" />
 
     <com.chenpan.commoner.widget.load.LoadingView
         android:id="@+id/fl_loading"
@@ -19,4 +19,5 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         />
+
 </RelativeLayout>

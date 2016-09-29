@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.chenpan.commoner.fragment.MusicLocalFragment;
 import com.chenpan.commoner.fragment.MusicOnlineFragment;
-import com.chenpan.commoner.fragment.PictureFragmentFormBaidu;
-import com.chenpan.commoner.fragment.PictureFragmentFromOther;
 
 import java.util.List;
 
@@ -27,7 +25,6 @@ public class MusicTabAdapter extends FragmentStatePagerAdapter {
             return fragment;
         } else {//在线音乐
             MusicLocalFragment fragment = new MusicLocalFragment();
-
             return fragment;
   }
 

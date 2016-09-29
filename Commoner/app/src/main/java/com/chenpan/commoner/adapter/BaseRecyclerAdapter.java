@@ -76,7 +76,7 @@ public class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>> 
 
     @Override
     public void onBindViewHolder(BaseHolder<T> holder, int position) {
-        holder.setData(mDatas.get(position));
+        holder.setData(mDatas.get(position),position);
     }
     public BaseRecyclerAdapter(List<T> mDatas, int mResLayout, Class<? extends BaseHolder<T>> mClazz) {
         if (mClazz == null) {

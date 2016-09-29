@@ -4,14 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.TextUtils;
 import android.view.View;
 
-import com.chenpan.commoner.ArticleActivity;
 import com.chenpan.commoner.ImagesDetailActivity;
 import com.chenpan.commoner.R;
-import com.chenpan.commoner.bean.ArticleBean;
 import com.chenpan.commoner.bean.PictureBeanBaiDu;
 import com.chenpan.commoner.utils.CommonUtils;
 import com.chenpan.commoner.widget.PLAImageView;
@@ -64,8 +60,8 @@ public class PictureBaiduHolder extends BaseHolder<PictureBeanBaiDu> {
     }
 
     @Override
-    public void setData(PictureBeanBaiDu itemData) {
-        super.setData(itemData);
+    public void setData(PictureBeanBaiDu itemData,int position) {
+        super.setData(itemData,position);
         int width = itemData.getThumbnailWidth();
         int height = itemData.getThumbnailHeight();
 

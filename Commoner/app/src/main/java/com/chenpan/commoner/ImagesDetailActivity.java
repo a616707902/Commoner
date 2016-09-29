@@ -28,7 +28,6 @@ import com.chenpan.commoner.widget.SmoothImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 
@@ -71,6 +70,10 @@ public class ImagesDetailActivity extends BaseActivity<ImageDetailView, ImageDet
         }
     }
 
+    @Override
+    public boolean isSetStatusBar() {
+        return true;
+    }
 
     @Override
     public ImageDetailPresenter createPresenter() {
@@ -84,6 +87,7 @@ public class ImagesDetailActivity extends BaseActivity<ImageDetailView, ImageDet
 
     @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
+
         mSmoothImageView.setOriginalInfo(mWidth, mHeight, mLocationX, mLocationY);
         mSmoothImageView.transformIn();
 

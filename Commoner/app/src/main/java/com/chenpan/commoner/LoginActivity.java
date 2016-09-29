@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * A login screen that offers login via email/password.
@@ -85,6 +84,11 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     @Override
     public int getToolBarId() {
         return 0;
+    }
+
+    @Override
+    public boolean isSetStatusBar() {
+        return false;
     }
 
     @Override

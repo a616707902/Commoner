@@ -29,7 +29,7 @@ public abstract class BaseHolder<T> extends RecyclerView.ViewHolder {
 
     }
 
-    public void setData(T mData) {
+    public void setData(T mData,int position) {
         this.mData = mData;
     }
 }

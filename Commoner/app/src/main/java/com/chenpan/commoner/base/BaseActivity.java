@@ -1,6 +1,8 @@
 package com.chenpan.commoner.base;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -35,7 +37,23 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SkinBa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (Build.VERSION.SDK_INT >= 21&&!isSetStatusBar()) {
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }else if (Build.VERSION.SDK_INT >= 21&&isSetStatusBar()){
+                View decorView = getWindow().getDecorView();
+                int option = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+                decorView.setSystemUiVisibility(option);
+                getWindow().setNavigationBarColor(Color.TRANSPARENT);
+                getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.hide();
         AppManager.getAppManager().addActivity(this);
 
      //  initWindow();
@@ -109,15 +127,12 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SkinBa
     }
 
 
-
     /**
      * 是否设置沉浸式
      *
      * @return
      */
-    protected boolean isSetStatusBar() {
-        return true;
-    }
+    public abstract boolean isSetStatusBar();
 
     /**
      * 将模式设为singletask，跳转时系统调用

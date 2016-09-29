@@ -329,6 +329,11 @@ public class OnlineMusicActivity extends BaseActivity<OnlineMusicView, OnlineMus
     }
 
     @Override
+    public boolean isSetStatusBar() {
+        return false;
+    }
+
+    @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
         init();
     }

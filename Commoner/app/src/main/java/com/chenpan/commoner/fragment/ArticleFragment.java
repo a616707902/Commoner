@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016/6/2.
@@ -76,12 +75,13 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
                 .withLoadingText("加载中...").withOnRetryListener(new OnRetryListener() {
             @Override
             public void onRetry() {
-                mPresenter.getArticleList(getActivity(), url, "getarticle", params);
+                mPresenter.getArticleList(getActivity(), url, url, params);
             }
         }).build();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                page=0;
                 params.put("url", url);
                 params.put("page", String.valueOf(page));
                 mPresenter.getArticleList(getActivity(), url, url, params);
@@ -204,7 +204,8 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
 
     }
     private void loadPage() {
-        params.put("url", url.replace(".html", "_" + (++page) + ".html"));
+       // url= url.replace(".html", "-" + (++page) + ".html");
+        params.put("url", url.replace(".html", "-" + (++page) + ".html"));
         params.put("page", String.valueOf(page));
         mPresenter.getArticleList(getActivity(), url,url, params);
     }

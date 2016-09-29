@@ -10,12 +10,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -61,6 +63,8 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     TabLayout mTabLayout;
     @Bind(R.id.viewpager)
     ViewPager mViewPager;
+    @Bind(R.id.content_layout)
+    CoordinatorLayout coordinatorLayout;
     @Bind(R.id.iv_play_bar_cover)
     ImageView ivPlayBarCover;
     @Bind(R.id.tv_play_bar_title)
@@ -150,9 +154,10 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     }
 
-
+    int marginBottom;
     @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
+        marginBottom = (int)(this.getResources().getDisplayMetrics().density * 57 + 0.5f);//转换为像素单位，55为自己要指定的dip值，0.5f为固定值
         boolean istrue = checkService();
         bindService();
         setLisner();
@@ -262,6 +267,9 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     private void setLisner() {
         if (mPlayService != null && mPlayService.isPlaying()) {
             flPlayBar.setVisibility(View.VISIBLE);
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            lp.setMargins(0,0, 0, marginBottom);
+            coordinatorLayout.setLayoutParams(lp);
         }
         flPlayBar.setOnClickListener(this);
         ivPlayBarPlay.setOnClickListener(this);
@@ -305,7 +313,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     }
 
     @Override
-    protected boolean isSetStatusBar() {
+    public boolean isSetStatusBar() {
         return true;
     }
 
@@ -322,8 +330,14 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         mTabLayout.removeAllTabs();
         if (mPlayService != null && mPlayService.isPlaying()) {
             flPlayBar.setVisibility(View.VISIBLE);
+             FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            lp.setMargins(0,0, 0, marginBottom);
+            coordinatorLayout.setLayoutParams(lp);
         } else {
             flPlayBar.setVisibility(View.GONE);
+             FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            lp.setMargins(0,0, 0,0);
+            coordinatorLayout.setLayoutParams(lp);
         }
         String[] titles = getResources().getStringArray(R.array.text_tab);
         // ArticleTabAdapter adapter =
@@ -337,8 +351,14 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     private void setupPictureViewPager() {
         if (mPlayService != null && mPlayService.isPlaying()) {
             flPlayBar.setVisibility(View.VISIBLE);
+             FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            lp.setMargins(0,0, 0, marginBottom);
+            coordinatorLayout.setLayoutParams(lp);
         } else {
             flPlayBar.setVisibility(View.GONE);
+             FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            lp.setMargins(0,0, 0,0);
+            coordinatorLayout.setLayoutParams(lp);
         }
         mTabLayout.removeAllTabs();
         String[] titles = getResources().getStringArray(R.array.Picture_tab);
@@ -352,6 +372,9 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     private void setupMusicViewPager() {
         flPlayBar.setVisibility(View.VISIBLE);
+         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        lp.setMargins(0,0, 0, marginBottom);
+        coordinatorLayout.setLayoutParams(lp);
         mTabLayout.removeAllTabs();
         String[] titles = getResources().getStringArray(R.array.Music_tab);
        /* MusicTabAdapter adapter =

@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.chenpan.commoner.ImagesDetailActivity;
 import com.chenpan.commoner.R;
-import com.chenpan.commoner.bean.PictureBeanBaiDu;
 import com.chenpan.commoner.bean.PictureBeanOther;
 import com.chenpan.commoner.utils.CommonUtils;
 import com.chenpan.commoner.widget.PLAImageView;
@@ -69,8 +68,8 @@ public class PictureOtherHolder extends BaseHolder<PictureBeanOther> {
     }
 
     @Override
-    public void setData(PictureBeanOther itemData) {
-        super.setData(itemData);
+    public void setData(PictureBeanOther itemData,int position) {
+        super.setData(itemData,position);
 
 
         String imageUrl = itemData.getUrl();

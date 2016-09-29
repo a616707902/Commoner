@@ -74,7 +74,8 @@
 
         <activity
             android:name=".SkinActivity"
-            android:label="@string/title_activity_skin"></activity>
+            android:label="@string/title_activity_skin"
+            android:theme="@style/TranslucentTheme"></activity>
     </application>
 
 </manifest>

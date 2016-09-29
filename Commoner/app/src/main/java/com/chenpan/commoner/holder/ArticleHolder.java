@@ -26,7 +26,7 @@ public class ArticleHolder extends BaseHolder<ArticleBean> {
     TextView tv_auth;
 
     @Bind(R.id.title)
-    public TextView title;
+  TextView title;
     @Bind(R.id.des)
     TextView des;
 
@@ -45,8 +45,8 @@ public class ArticleHolder extends BaseHolder<ArticleBean> {
     }
 
     @Override
-    public void setData(ArticleBean mData) {
-        super.setData(mData);
+    public void setData(ArticleBean mData,int position) {
+        super.setData(mData,position);
         title.setText(mData.title);
         des.setText(Html.fromHtml(mData.text));
         if (TextUtils.isEmpty(mData.auth)) {

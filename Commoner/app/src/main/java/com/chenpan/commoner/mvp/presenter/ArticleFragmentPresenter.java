@@ -19,8 +19,8 @@ public class ArticleFragmentPresenter extends BasePresenter<IArticleFragmentView
     private ArticleFragmentModel articleFragmentModel = new IArticleFragmentModel();
     private String url;
 
-    public void getArticleList(Context context, String url, String tag, final Map<String, String> params) {
-        this.url = url;
+    public void getArticleList(Context context, String urls, String tag, final Map<String, String> params) {
+        this.url = params.get("url");
         if (!getWeakView().checkNet()) {
             getWeakView().onRefreshComplete();
             getWeakView().onLoadMoreComplete();

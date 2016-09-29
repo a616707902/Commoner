@@ -16,7 +16,6 @@ import com.chenpan.commoner.widget.load.OnRetryListener;
 import com.chenpan.commoner.widget.scrollview.OverScrollView;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class ArticleActivity extends BaseActivity<ArticleView, ArticlePresenter> implements ArticleView {
     ArticleBean mArticle;
@@ -35,6 +34,11 @@ public class ArticleActivity extends BaseActivity<ArticleView, ArticlePresenter>
     @Override
     public int getToolBarId() {
         return R.id.toolbar;
+    }
+
+    @Override
+    public boolean isSetStatusBar() {
+        return false;
     }
 
     @Override

@@ -8,17 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.chenpan.commoner.R;
 import com.chenpan.commoner.bean.Constants;
 import com.chenpan.commoner.bean.JOnlineMusic;
 import com.chenpan.commoner.bean.JOnlineMusicList;
 import com.chenpan.commoner.bean.SongListInfo;
 import com.chenpan.commoner.network.JsonCallback;
-import com.chenpan.commoner.network.VolleyInterface;
-import com.chenpan.commoner.network.VolleyRequest;
 import com.chenpan.commoner.utils.ImageUtils;
-import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -127,7 +123,7 @@ public class SongListAdapter extends BaseAdapter {
             param.put(Constants.PARAM_TYPE, songListInfo.getType());
             param.put(Constants.PARAM_SIZE,"3");
 
-/*
+
             OkHttpUtils.get().url(Constants.BASE_URL)
                     .addParams(Constants.PARAM_METHOD, Constants.METHOD_GET_MUSIC_LIST)
                     .addParams(Constants.PARAM_TYPE, songListInfo.getType())
@@ -149,8 +145,8 @@ public class SongListAdapter extends BaseAdapter {
                         @Override
                         public void onError(Call call, Exception e) {
                         }
-                    });*/
-            VolleyRequest.RequestPostString(Constants.BASE_URL,"null", param, new VolleyInterface() {
+                    });
+           /* VolleyRequest.RequestPostString(Constants.BASE_URL,songListInfo.getTitle(), param, new VolleyInterface() {
                 @Override
                 public void onMySuccess(String responses) {
                     try {
@@ -173,7 +169,7 @@ public class SongListAdapter extends BaseAdapter {
                 public void onMyError(VolleyError result) {
 
                 }
-            });
+            });*/
         } else {
             holderMusicList.ivCover.setTag(null);
             setData(songListInfo, holderMusicList);

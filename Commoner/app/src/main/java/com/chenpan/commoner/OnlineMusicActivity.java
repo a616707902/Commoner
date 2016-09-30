@@ -145,8 +145,8 @@ public class OnlineMusicActivity extends BaseActivity<OnlineMusicView, OnlineMus
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
 
-                            case 0:// 查看歌手信息
-                                //artistInfo(jOnlineMusic);
+                            case 0:// 分享
+                                share(jOnlineMusic);
                                 break;
                             case 1:// 下载
                                 download(jOnlineMusic);
@@ -222,6 +222,25 @@ public class OnlineMusicActivity extends BaseActivity<OnlineMusicView, OnlineMus
                 });
     }*/
 
+
+    private void share(final JOnlineMusic jOnlineMusic) {
+//        new ShareOnlineMusic(this, jOnlineMusic.getTitle(), jOnlineMusic.getSong_id()) {
+//            @Override
+//            public void onPrepare() {
+//                mProgressDialog.show();
+//            }
+//
+//            @Override
+//            public void onSuccess() {
+//                mProgressDialog.cancel();
+//            }
+//
+//            @Override
+//            public void onFail(Call call, Exception e) {
+//                mProgressDialog.cancel();
+//            }
+//        }.execute();
+    }
     public void onLoad() {
        mPresenter.onLoad(Constants.BASE_URL,mOffset,mListInfo.getType());
     }

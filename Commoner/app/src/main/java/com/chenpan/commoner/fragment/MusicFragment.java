@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -33,6 +31,7 @@ import com.chenpan.commoner.utils.CoverLoader;
 import com.chenpan.commoner.utils.FileUtils;
 import com.chenpan.commoner.utils.ImageUtils;
 import com.chenpan.commoner.utils.Preferences;
+import com.chenpan.commoner.utils.SearchLrc;
 import com.chenpan.commoner.utils.SystemUtils;
 import com.chenpan.commoner.utils.ToastFactory;
 import com.chenpan.commoner.widget.PlayerDiscView;
@@ -405,7 +404,8 @@ private  SeekBar.OnSeekBarChangeListener seekBarChangeListener=new SeekBar.OnSee
             if (new File(lrcPath).exists()) {
                 loadLrc(lrcPath);
             } else {
-              /*  new SearchLrc(music.getArtist(), music.getTitle()) {
+
+                new SearchLrc(music.getArtist(), music.getTitle()) {
                     @Override
                     public void onPrepare() {
                         mLrcViewSingle.searchLrc();
@@ -420,7 +420,7 @@ private  SeekBar.OnSeekBarChangeListener seekBarChangeListener=new SeekBar.OnSee
                             loadLrc(lrcPath);
                         }
                     }
-                }.execute();*/
+                }.execute();
             }
         } else {
             String lrcPath = FileUtils.getLrcDir() + FileUtils.getLrcFileName(music.getArtist(), music.getTitle());

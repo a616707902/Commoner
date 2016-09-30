@@ -3,21 +3,21 @@ package com.chenpan.commoner.fragment;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
-import android.media.AudioManager;
+import android.database.Cursor;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,13 +30,15 @@ import com.chenpan.commoner.base.MyApplication;
 import com.chenpan.commoner.bean.Music;
 import com.chenpan.commoner.mvp.presenter.MusicLocalPresenter;
 import com.chenpan.commoner.mvp.view.IMusicLocalView;
-import com.chenpan.commoner.receiver.RemoteControlReceiver;
-import com.chenpan.commoner.service.OnPlayerEventListener;
 import com.chenpan.commoner.service.PlayService;
+import com.chenpan.commoner.utils.FileUtils;
 import com.chenpan.commoner.utils.OnMoreClickListener;
+import com.chenpan.commoner.utils.SystemUtils;
+import com.chenpan.commoner.utils.ToastFactory;
+
+import java.io.File;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016/7/6.
@@ -58,6 +60,7 @@ public class MusicLocalFragment extends BaseFragment<IMusicLocalView, MusicLocal
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        mHandler=new Handler();
         if (activity instanceof MainActivity) {
             mPlayService = ((MainActivity) activity).getPlayService();
         }
@@ -82,18 +85,16 @@ public class MusicLocalFragment extends BaseFragment<IMusicLocalView, MusicLocal
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
-                            /*case 0:// 分享
-                                shareMusic(music);
-                                break;
-                            case 1:// 设为铃声
+
+                            case 0:// 设为铃声
                                 setRingtone(music);
                                 break;
-                            case 2:// 查看歌曲信息
+                            case 1:// 查看歌曲信息
                                 musicInfo(music);
                                 break;
-                            case 3:// 删除
+                            case 2:// 删除
                                 deleteMusic(music);
-                                break;*/
+                                break;
                         }
                     }
                 });
@@ -167,6 +168,90 @@ public class MusicLocalFragment extends BaseFragment<IMusicLocalView, MusicLocal
     public void onDestroy() {
         getActivity().unregisterReceiver(mDownloadReceiver);
         super.onDestroy();
+    }
+    /**
+     * 设置铃声
+     */
+    private void setRingtone(Music music) {
+        Uri uri = MediaStore.Audio.Media.getContentUriForPath(music.getUri());
+        // 查询音乐文件在媒体库是否存在
+        Cursor cursor = getActivity().getContentResolver().query(uri, null,
+                MediaStore.MediaColumns.DATA + "=?", new String[]{music.getUri()}, null);
+        if (cursor == null) {
+            return;
+        }
+        if (cursor.moveToFirst() && cursor.getCount() > 0) {
+            String _id = cursor.getString(0);
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.Audio.Media.IS_MUSIC, true);
+            values.put(MediaStore.Audio.Media.IS_RINGTONE, true);
+            values.put(MediaStore.Audio.Media.IS_ALARM, false);
+            values.put(MediaStore.Audio.Media.IS_NOTIFICATION, false);
+            values.put(MediaStore.Audio.Media.IS_PODCAST, false);
+
+            getActivity().getContentResolver().update(uri, values, MediaStore.MediaColumns.DATA +
+                    "=?", new String[]{music.getUri()});
+            Uri newUri = ContentUris.withAppendedId(uri, Long.valueOf(_id));
+            RingtoneManager.setActualDefaultRingtoneUri(getActivity(),
+                    RingtoneManager.TYPE_RINGTONE, newUri);
+            ToastFactory.show("设置成功");
+        }
+        cursor.close();
+    }
+
+    /**
+     * 查看歌曲信息
+     * @param music
+     */
+    private void musicInfo(Music music) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        dialog.setTitle(music.getTitle());
+        StringBuilder sb = new StringBuilder();
+        sb.append("艺术家：")
+                .append(music.getArtist())
+                .append("\n\n")
+                .append("专辑：")
+                .append(music.getAlbum())
+                .append("\n\n")
+                .append("播放时长：")
+                .append(SystemUtils.formatTime("mm:ss", music.getDuration()))
+                .append("\n\n")
+                .append("文件名称：")
+                .append(music.getFileName())
+                .append("\n\n")
+                .append("文件大小：")
+                .append(FileUtils.b2mb((int) music.getFileSize()))
+                .append("MB")
+                .append("\n\n")
+                .append("文件路径：")
+                .append(new File(music.getUri()).getParent());
+        dialog.setMessage(sb.toString());
+        dialog.show();
+    }
+    /**
+     * 删除音乐
+     */
+    private void deleteMusic(final Music music) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        String title = music.getTitle();
+        String msg = getString(R.string.delete_music, title);
+        dialog.setMessage(msg);
+        dialog.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                PlayService.getMusicList().remove(music);
+                File file = new File(music.getUri());
+                if (file.delete()) {
+                    getPlayService().updatePlayingPosition();
+                    updateView();
+                    // 刷新媒体库
+                    Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + music.getUri()));
+                    getActivity().sendBroadcast(intent);
+                }
+            }
+        });
+        dialog.setNegativeButton(R.string.cancel, null);
+        dialog.show();
     }
 
 }

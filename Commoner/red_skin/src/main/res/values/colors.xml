@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Toolbar颜色-->
     <color name="colorPrimary">#e93149</color>
+    <!--状态栏颜色-->
     <color name="colorPrimaryDark">#FF4081</color>
+    <!--控件颜色 如checkbox等-->
     <color name="colorAccent">#FF4081</color>
+    <!--main_activity  toolbar，tablayout颜色-->
     <color name="material_drawer_primary">@color/materialize_primary</color>
     <color name="materialize_primary">@color/primary</color>
     <color name="primary">@color/colorPrimary</color>
     <color name="material_drawer_primary_dark">#FF4081</color>
-    <color name="translucent_white_96p">#f54361c4</color>
-    <color name="translucent_grey_300_96p">#f5200def</color>
-    <color name="translucent_grey_900_96p">#F5212121</color>
+    <color name="translucent_white_96p">#FF4081</color>
+    <color name="translucent_grey_300_96p">#FF4081</color>
+    <color name="translucent_grey_900_96p">#FF4081</color>
     <color name="translucent_grey_700_96p">#F5616161</color>
     <color name="translucent_black">#80000000</color>
     <color name="translucent_white_8p">#14FFFFFF</color>
-
-    <color name="tab_line">#f5200def</color>
+<!--tabline颜色-->
+    <color name="tab_line">#f5eaa7d1</color>
 </resources>

@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="local_music_dialog">
-        <item>分享</item>
         <item>设为铃声</item>
         <item>查看歌曲信息</item>
         <item>删除</item>
     </string-array>
     <string-array name="local_music_dialog_without_delete">
-        <item>分享</item>
         <item>设为铃声</item>
         <item>查看歌曲信息</item>
     </string-array>
     <string-array name="online_music_dialog">
-        <item>查看歌手信息</item>
+        <item>分享</item>
         <item>下载</item>
     </string-array>
     <string-array name="online_music_dialog_without_download">
-        <item>查看歌手信息</item>
+        <item>分享</item>
     </string-array>
     <string-array name="search_music_dialog">
         <item>分享</item>

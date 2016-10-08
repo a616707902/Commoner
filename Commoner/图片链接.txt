@@ -1,1 +1,3 @@
-��Ů��http://image.baidu.com/data/imgs?col=��Ů&tag=ȫ��&pn=0&rn=20&from=1
+美女：http://image.baidu.com/data/imgs?col=美女&tag=全部&pn=0&rn=20&from=1
+
+换肤框架，在主activity里面的toolbar和tablayout要单个实现换肤

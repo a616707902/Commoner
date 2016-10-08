@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="@dimen/material_drawer_account_header_compact"
+android:orientation="horizontal"
+android:paddingEnd="@dimen/material_drawer_vertical_padding"
+android:paddingLeft="@dimen/material_drawer_vertical_padding"
+android:paddingRight="@dimen/material_drawer_vertical_padding"
+android:paddingStart="@dimen/material_drawer_vertical_padding">
+
+<ImageView
+    android:id="@+id/material_drawer_icon"
+    android:layout_width="@dimen/material_drawer_item_primary_icon"
+    android:layout_height="@dimen/material_drawer_item_primary"
+    android:layout_gravity="center_vertical"
+    android:paddingBottom="@dimen/material_drawer_item_primary_icon_padding"
+    android:paddingEnd="@dimen/material_drawer_item_primary_icon_padding_right"
+    android:paddingLeft="0dp"
+    android:paddingRight="@dimen/material_drawer_item_primary_icon_padding_right"
+    android:paddingStart="0dp"
+    android:src="@drawable/weather"
+    android:paddingTop="@dimen/material_drawer_item_primary_icon_padding" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_vertical|start"
+        android:lines="1"
+        android:layout_gravity="center_vertical"
+        android:singleLine="true"
+        android:textDirection="anyRtl"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/material_drawer_item_primary_text"
+        android:text="天气" />
+
+
+
+<LinearLayout
+    android:id="@+id/material_drawer_badge_container"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/tv_weather_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5°"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp" />
+
+
+    <TextView
+        android:id="@+id/tv_weather_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="杭州市"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp" />
+</LinearLayout>
+</LinearLayout>
+    <!--<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_weather"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="bottom|right"
+        android:orientation="vertical"
+        android:paddingRight="@dimen/dp_five"
+        android:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/tv_weather_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5°"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+        >
+
+        <TextView
+            android:id="@+id/tv_weather_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="杭州市"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>-->

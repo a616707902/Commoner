@@ -16,10 +16,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -157,6 +159,9 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     int marginBottom;
     @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
+        dynamicAddSkinEnableView(toolbar, "background", R.color.colorPrimary);
+        dynamicAddSkinEnableView(mTabLayout, "background", R.color.colorPrimary);//tabIndicatorColor
+        dynamicAddSkinEnableView(mTabLayout, "tabIndicatorColor", R.color.tab_line);
         marginBottom = (int)(this.getResources().getDisplayMetrics().density * 57 + 0.5f);//转换为像素单位，55为自己要指定的dip值，0.5f为固定值
         boolean istrue = checkService();
         bindService();
@@ -171,7 +176,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
             profile = new ProfileDrawerItem().withName("未登录").withIcon(R.mipmap.ic_launcher).withIdentifier(100);
         }
         headerResult = new AccountHeaderBuilder().withOnlyMainProfileImageVisible(true).withSelectionListEnabled(false)
-                .withActivity(this).withHeightDp(230)
+                .withActivity(this).withHeightDp(220)
                 .withHeaderBackground(R.drawable.side_bg)
                 .addProfiles(
                         profile
@@ -190,12 +195,24 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                     }
                 }).withSavedInstance(savedInstanceState)
                 .build();
+        LinearLayout footView= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.weather_foot,null);
+        TextView warm= (TextView) footView.findViewById(R.id.tv_weather_temp);
+        TextView city=(TextView) footView.findViewById(R.id.tv_weather_city);
+    footView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(MainActivity.this,WeatherActivity.class);
+            startActivity(intent);
+        }
+    });
         result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withHasStableIds(true)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
+                .withFooter(footView)
                 .addDrawerItems(
+                        //名字，图片，第几个，可否选中
                         new PrimaryDrawerItem().withName(R.string.article).withIcon(R.drawable.article).withIdentifier(1).withSelectable(true),
                         new PrimaryDrawerItem().withName(R.string.picture).withIcon(R.drawable.pictureicon).withIdentifier(2).withSelectable(true).withBadgeStyle(new BadgeStyle().withTextColor(Color.WHITE).withColorRes(R.color.md_red_700)),
                         new PrimaryDrawerItem().withName(R.string.video).withIcon(R.drawable.videoicon).withIdentifier(3).withSelectable(true),

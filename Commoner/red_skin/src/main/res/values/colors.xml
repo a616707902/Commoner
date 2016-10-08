@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--Toolbar颜色-->
-    <color name="colorPrimary">#e93149</color>
+    <!--Toolbar颜色  4E3E7F-->
+    <color name="colorPrimary">#4E3E7F</color>
     <!--状态栏颜色-->
-    <color name="colorPrimaryDark">#FF4081</color>
+    <color name="colorPrimaryDark">#4E3E7F</color>
     <!--控件颜色 如checkbox等-->
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#4E3E7F</color>
     <!--main_activity  toolbar，tablayout颜色-->
     <color name="material_drawer_primary">@color/materialize_primary</color>
     <color name="materialize_primary">@color/primary</color>
     <color name="primary">@color/colorPrimary</color>
-    <color name="material_drawer_primary_dark">#FF4081</color>
-    <color name="translucent_white_96p">#FF4081</color>
-    <color name="translucent_grey_300_96p">#FF4081</color>
-    <color name="translucent_grey_900_96p">#FF4081</color>
+    <!--tablayout的颜色  这里没用-->
+    <color name="material_drawer_primary_dark">#4E3E7F</color>
+<!--音乐状态栏的颜色-->
+    <color name="translucent_white_96p">#4E3E7F</color>
+    <color name="translucent_grey_300_96p">#4E3E7F</color>
+    <color name="translucent_grey_900_96p">#4E3E7F</color>
     <color name="translucent_grey_700_96p">#F5616161</color>
     <color name="translucent_black">#80000000</color>
     <color name="translucent_white_8p">#14FFFFFF</color>
 <!--tabline颜色-->
-    <color name="tab_line">#f5eaa7d1</color>
+    <color name="tab_line">#4E3EFF</color>
 </resources>

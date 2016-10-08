@@ -41,7 +41,8 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="无音乐"
-                android:textSize="@dimen/text_size_common" />
+                android:textSize="@dimen/text_size_common"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/tv_play_bar_artist"

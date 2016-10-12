@@ -2,6 +2,7 @@ package com.chenpan.commoner.fragment;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -81,7 +82,7 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                page=0;
+                page = 0;
                 params.put("url", url);
                 params.put("page", String.valueOf(page));
                 mPresenter.getArticleList(getActivity(), url, url, params);
@@ -89,6 +90,7 @@ public class ArticleFragment extends BaseFragment<IArticleFragmentView, ArticleF
         });
         mLayoutManager = new LinearLayoutManager(recyclerView.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

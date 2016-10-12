@@ -3,8 +3,8 @@ package com.chenpan.commoner.mvp.modle.imp;
 import android.content.Context;
 
 import com.android.volley.VolleyError;
-import com.chenpan.commoner.bean.ArticleBean;
 import com.chenpan.commoner.mvp.modle.ArticleModel;
+import com.chenpan.commoner.mvp.modle.MyCallback;
 import com.chenpan.commoner.network.VolleyInterface;
 import com.chenpan.commoner.network.VolleyRequest;
 
@@ -13,14 +13,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2016/6/20.
  */
 public class IArticleModel implements ArticleModel {
     @Override
-    public void parserArticle(Context context, String url, String tag, final Callback<String> mCallback) {
+    public void parserArticle(Context context, String url, String tag, final MyCallback<String> mCallback) {
         VolleyRequest.RequestGetString(url, tag, new VolleyInterface() {
             @Override
             public void onMySuccess(String results) {

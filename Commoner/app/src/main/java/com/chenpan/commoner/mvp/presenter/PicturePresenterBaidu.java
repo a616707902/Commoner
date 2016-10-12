@@ -3,8 +3,8 @@ package com.chenpan.commoner.mvp.presenter;
 import android.content.Context;
 
 import com.chenpan.commoner.base.pbase.BasePresenter;
-import com.chenpan.commoner.bean.PictureBean;
 import com.chenpan.commoner.bean.PictureBeanBaiDu;
+import com.chenpan.commoner.mvp.modle.MyCallback;
 import com.chenpan.commoner.mvp.modle.PictureFramentModel;
 import com.chenpan.commoner.mvp.modle.imp.IPictureFragmentBaiDuModel;
 import com.chenpan.commoner.mvp.view.IPictureView;
@@ -33,7 +33,7 @@ private  String  BDurl="http://image.baidu.com/data/imgs";
         url.append(BDurl).append("?col=").append(tag).append("&tag=全部").append("&pn=").append(MAX*page);
         url.append("&rn=").append(MAX).append("&from=1");
 
-        pictureFramentModel.parserPictureBaidu(context, url.toString(), tag, new PictureFramentModel.Callback<List<PictureBeanBaiDu>>() {
+        pictureFramentModel.parserPictureBaidu(context, url.toString(), tag, new MyCallback<List<PictureBeanBaiDu>>() {
             @Override
             public void onSccuss(List<PictureBeanBaiDu> data) {
                 if (getWeakView() == null) return;

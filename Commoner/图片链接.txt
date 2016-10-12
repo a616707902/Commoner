@@ -1,3 +1,10 @@
 美女：http://image.baidu.com/data/imgs?col=美女&tag=全部&pn=0&rn=20&from=1
 
 换肤框架，在主activity里面的toolbar和tablayout要单个实现换肤
+
+高德地图key：1b37a92f8376fb9821615a0a5aaf5881
+
+打包签名：keystore.jks
+
+
+密码：CHen196201

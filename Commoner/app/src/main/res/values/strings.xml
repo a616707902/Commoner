@@ -88,6 +88,43 @@
         <item>大学生励志@chenpan@http://www.lz13.cn/lizhi/daxueshenglizhi.html</item>
         <item>励志奖学金@chenpan@http://www.lz13.cn/lizhi/lizhijiangxuejin.html</item>
     </array>
+    <!--top(头条，默认),shehui(社会),guonei(国内),guoji(国际),yule(娱乐),tiyu(体育)junshi(军事),keji(科技),caijing(财经),shishang(时尚)-->
+    <array name="news_tab">
+        <!--定死不能更改的三个频道-->
+        <item>头条@chenpan@T1348647909107</item>
+        <item>科技@chenpan@T1348649580692</item>
+        <item>财经@chenpan@T1348648756099</item>
+
+        <item>军事@chenpan@T1348648141035</item>
+        <item>体育@chenpan@T1348649079062</item>
+
+        <item>足球@chenpan@T1399700447917</item>
+        <item>娱乐@chenpan@T1348648517839</item>
+        <item>电影@chenpan@T1348648650048</item>
+        <item>汽车@chenpan@T1348654060988</item>
+        <item>笑话@chenpan@T1350383429665</item>
+        <item>游戏@chenpan@T1348654151579</item>
+        <item>时尚@chenpan@T1348650593803</item>
+        <item>情感@chenpan@T1348650839000</item>
+        <item>精选@chenpan@T1370583240249</item>
+        <item>电台@chenpan@T1379038288239</item>
+        <item>NBA@chenpan@T1348649145984</item>
+        <item>数码@chenpan@T1348649776727</item>
+        <item>移动@chenpan@T1351233117091</item>
+        <item>彩票@chenpan@T1356600029035</item>
+        <item>教育@chenpan@T1348654225495</item>
+        <item>论坛@chenpan@T1349837670307</item>
+        <item>旅游@chenpan@T1348654204705</item>
+        <item>手机@chenpan@T1348649654285</item>
+        <item>博客@chenpan@T1349837698345</item>
+        <item>社会@chenpan@T1348648037603</item>
+        <item>家居@chenpan@T1348654105308</item>
+        <item>暴雪@chenpan@T1397016069906</item>
+        <item>亲子@chenpan@T1397116135282</item>
+        <item>CBA@chenpan@T1348649475931</item>
+        <item>消息@chenpan@T1371543208049</item>
+
+    </array>
     <!--http://image.baidu.com/data/imgs?col=美女&tag=全部&pn=0&rn=20&from=1-->
     <array name="Picture_tab">
         <item>美女@chenpan@美女</item>
@@ -104,9 +141,6 @@
     <array name="Music_tab">
         <item>本地音乐@chenpan@本地音乐</item>
         <item>在线音乐@chenpan@在线音乐</item>
-
-
-
 
 
     </array>
@@ -135,4 +169,13 @@
     <string name="setting_key_mobile_network_download">mobile_network_download</string>
     <string name="setting_key_sound_effect">sound_effect</string>
     <string name="title_activity_skin">SkinActivity</string>
+    <string name="weather_temp">%s°</string>
+    <string name="news">新闻</string>
+    <!-- 共享过度动画 -->
+    <string name="transition_photos">transition_animation_news_photos</string>
+    <string name="photo_collections">图集：%1$s</string>
+    <string name="title_activity_news_photo_detail">NewsPhotoDetailActivity</string>
+    <string name="title_activity_news_detail">NewsDetailActivity</string>
+    <string name="photonews">图片新闻</string>
+    <string name="photo_detail_title">%1$d/%2$d　%3$s</string>
 </resources>

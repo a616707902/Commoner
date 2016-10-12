@@ -3,10 +3,10 @@ package com.chenpan.commoner.mvp.modle.imp;
 import android.content.Context;
 
 import com.android.volley.VolleyError;
-import com.chenpan.commoner.bean.PictureBean;
 import com.chenpan.commoner.bean.PictureBeanBaiDu;
 import com.chenpan.commoner.bean.PictureBeanOther;
 import com.chenpan.commoner.bean.ResponseImagesListEntity;
+import com.chenpan.commoner.mvp.modle.MyCallback;
 import com.chenpan.commoner.mvp.modle.PictureFramentModel;
 import com.chenpan.commoner.network.VolleyInterface;
 import com.chenpan.commoner.network.VolleyRequest;
@@ -20,7 +20,7 @@ import java.util.List;
 public class IPictureFragmentBaiDuModel implements PictureFramentModel {
 
     @Override
-    public void parserPictureBaidu(Context context, String url, String tag, final Callback<List<PictureBeanBaiDu>> mCallback) {
+    public void parserPictureBaidu(Context context, String url, String tag, final MyCallback<List<PictureBeanBaiDu>> mCallback) {
         VolleyRequest.RequestGetStringS(url, tag, new VolleyInterface() {
             @Override
             public void onMySuccess(String result) {
@@ -41,7 +41,9 @@ public class IPictureFragmentBaiDuModel implements PictureFramentModel {
     }
 
     @Override
-    public void parserPictureOther(Context context, String url, String tag, Callback<List<PictureBeanOther>> mCallback) {
+    public void parserPictureOther(Context context, String url, String tag, MyCallback<List<PictureBeanOther>> mCallback) {
 
     }
+
+
 }

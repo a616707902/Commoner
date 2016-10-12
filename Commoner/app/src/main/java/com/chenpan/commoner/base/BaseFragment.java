@@ -95,6 +95,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends SkinBa
 
     @Override
     public void onDestroy() {
+     //   ButterKnife.unbind(this);
         if (mPresenter != null) {
             mPresenter.detachView((V) this);
             mPresenter = null;

@@ -1,16 +1,13 @@
 package com.chenpan.commoner.mvp.modle.imp;
 
-import android.content.Context;
-
 import com.android.volley.VolleyError;
-import com.chenpan.commoner.bean.JOnlineMusic;
 import com.chenpan.commoner.bean.JOnlineMusicList;
+import com.chenpan.commoner.mvp.modle.MyCallback;
 import com.chenpan.commoner.mvp.modle.OnlineMusicModel;
 import com.chenpan.commoner.network.VolleyInterface;
 import com.chenpan.commoner.network.VolleyRequest;
 import com.google.gson.Gson;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +18,7 @@ public class IOnlineMusicModel implements OnlineMusicModel {
     Gson mGson;
 
     @Override
-    public void parserMusic(String url, String tag, Map<String, String> param, final Callback<JOnlineMusicList> mCallback) {
+    public void parserMusic(String url, String tag, Map<String, String> param, final MyCallback<JOnlineMusicList> mCallback) {
         VolleyRequest.RequestPostString(url, tag, param, new VolleyInterface() {
             @Override
             public void onMySuccess(String result) {

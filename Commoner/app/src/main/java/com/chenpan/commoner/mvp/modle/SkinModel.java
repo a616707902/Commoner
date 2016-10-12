@@ -4,16 +4,16 @@ package com.chenpan.commoner.mvp.modle;
  * Created by Administrator on 2016/7/28.
  */
 public interface SkinModel {
-    void setRedSkin(String fileString, Callback callback);
+    void setRedSkin(String fileString, CallbackSkin callback);
 
-    void setBlackSkin(String fileString, Callback callback);
+    void setBlackSkin(String fileString, CallbackSkin callback);
 
-    void setGreenSkin(String fileString, Callback callback);
+    void setGreenSkin(String fileString, CallbackSkin callback);
 
-    void setBlueSkin(Callback callback);
+    void setBlueSkin(CallbackSkin callback);
 
 
-    interface Callback {
+    interface CallbackSkin {
         public void onSccuss();
 
         public void onFaild();

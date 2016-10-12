@@ -5,14 +5,17 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 
 import com.chenpan.commoner.MainActivity;
 import com.chenpan.commoner.R;
 import com.chenpan.commoner.base.BaseActivity;
 import com.chenpan.commoner.bean.Music;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -81,4 +84,17 @@ public class SystemUtils {
         String ss = String.format("%02d", s);
         return pattern.replace("mm", mm).replace("ss", ss);
     }
+    public static String formatDate(String before) {
+        String after;
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                    .parse(before);
+            after = new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(date);
+        } catch (ParseException e) {
+            return before;
+        }
+        return after;
+    }
+
+
 }

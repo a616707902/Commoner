@@ -9,7 +9,7 @@
     tools:context="com.chenpan.commoner.MainActivity">
 
     <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/content_layout"
+        android:id="@+id/content_main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         skin:enable="true"

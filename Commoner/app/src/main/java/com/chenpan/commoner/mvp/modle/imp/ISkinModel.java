@@ -12,7 +12,7 @@ import java.io.File;
  */
 public class ISkinModel  implements SkinModel{
     @Override
-    public void setRedSkin(String fileString, final Callback callback) {
+    public void setRedSkin(String fileString, final CallbackSkin callback) {
         File skin = new File(fileString);
 
         if(skin == null || !skin.exists()){
@@ -38,7 +38,7 @@ public class ISkinModel  implements SkinModel{
     }
 
     @Override
-    public void setBlackSkin(String fileString, Callback callback) {
+    public void setBlackSkin(String fileString, CallbackSkin callback) {
         File skin = new File(fileString);
 
         if(skin == null || !skin.exists()){
@@ -48,7 +48,7 @@ public class ISkinModel  implements SkinModel{
     }
 
     @Override
-    public void setGreenSkin(String fileString, Callback callback) {
+    public void setGreenSkin(String fileString, CallbackSkin callback) {
         File skin = new File(fileString);
 
         if(skin == null || !skin.exists()){
@@ -58,7 +58,7 @@ public class ISkinModel  implements SkinModel{
     }
 
     @Override
-    public void setBlueSkin(Callback callback) {
+    public void setBlueSkin(CallbackSkin callback) {
         SkinManager.getInstance().restoreDefaultTheme();
         callback.onSccuss();
     }

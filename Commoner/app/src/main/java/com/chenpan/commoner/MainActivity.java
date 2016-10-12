@@ -1,13 +1,16 @@
 package com.chenpan.commoner;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.CoordinatorLayout;
@@ -25,8 +28,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocalWeatherLive;
 import com.chenpan.commoner.adapter.ArticleTabAdapter;
 import com.chenpan.commoner.adapter.MusicTabAdapter;
+import com.chenpan.commoner.adapter.NewsTabAdapter;
 import com.chenpan.commoner.adapter.PictureTabAdapter;
 import com.chenpan.commoner.base.BaseActivity;
 import com.chenpan.commoner.bean.Music;
@@ -40,6 +45,8 @@ import com.chenpan.commoner.service.PlayService;
 import com.chenpan.commoner.utils.CoverLoader;
 import com.chenpan.commoner.utils.Extras;
 import com.chenpan.commoner.utils.SystemUtils;
+import com.chenpan.commoner.utils.ToastFactory;
+import com.chenpan.commoner.weather.WeatherExecutor;
 import com.example.chenpan.library.AccountHeader;
 import com.example.chenpan.library.AccountHeaderBuilder;
 import com.example.chenpan.library.Drawer;
@@ -65,7 +72,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     TabLayout mTabLayout;
     @Bind(R.id.viewpager)
     ViewPager mViewPager;
-    @Bind(R.id.content_layout)
+    @Bind(R.id.content_main_layout)
     CoordinatorLayout coordinatorLayout;
     @Bind(R.id.iv_play_bar_cover)
     ImageView ivPlayBarCover;
@@ -86,6 +93,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     private boolean ISPLAYING = false;
     private MusicFragment mPlayFragment;
     private boolean isPlayFragmentShow = false;
+    public AMapLocalWeatherLive mAMapLocalWeatherLive;
 
     /**
      * 音乐播放后台服务
@@ -157,8 +165,33 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     }
 
     int marginBottom;
+    LinearLayout footView;
+    private void updateWeather() {
+         footView= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.weather_foot,null);
+        footView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,WeatherActivity.class);
+                startActivity(intent);
+            }
+        });
+        new WeatherExecutor(this, footView,mAMapLocalWeatherLive).execute();
+    }
     @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION }, 1);
+
+            } else {
+                updateWeather();
+            }
+        } else {
+            updateWeather();
+        }
+
         dynamicAddSkinEnableView(toolbar, "background", R.color.colorPrimary);
         dynamicAddSkinEnableView(mTabLayout, "background", R.color.colorPrimary);//tabIndicatorColor
         dynamicAddSkinEnableView(mTabLayout, "tabIndicatorColor", R.color.tab_line);
@@ -195,16 +228,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                     }
                 }).withSavedInstance(savedInstanceState)
                 .build();
-        LinearLayout footView= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.weather_foot,null);
-        TextView warm= (TextView) footView.findViewById(R.id.tv_weather_temp);
-        TextView city=(TextView) footView.findViewById(R.id.tv_weather_city);
-    footView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent=new Intent(MainActivity.this,WeatherActivity.class);
-            startActivity(intent);
-        }
-    });
+
         result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
@@ -215,7 +239,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                         //名字，图片，第几个，可否选中
                         new PrimaryDrawerItem().withName(R.string.article).withIcon(R.drawable.article).withIdentifier(1).withSelectable(true),
                         new PrimaryDrawerItem().withName(R.string.picture).withIcon(R.drawable.pictureicon).withIdentifier(2).withSelectable(true).withBadgeStyle(new BadgeStyle().withTextColor(Color.WHITE).withColorRes(R.color.md_red_700)),
-                        new PrimaryDrawerItem().withName(R.string.video).withIcon(R.drawable.videoicon).withIdentifier(3).withSelectable(true),
+                        new PrimaryDrawerItem().withName(R.string.news).withIcon(R.drawable.news).withIdentifier(3).withSelectable(true),
                         new PrimaryDrawerItem().withName(R.string.music).withIcon(R.drawable.musicicon).withIdentifier(4).withSelectable(true),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withName(R.string.skinchange).withIcon(R.drawable.skin).withIdentifier(6).withSelectable(false),
@@ -244,7 +268,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                                 dId = 3;
                                 mTabLayout.removeAllTabs();
                                 mViewPager.removeAllViews();
-                                //  setupTextViewPager();
+                                  setupNewsViewPager();
                             } else if (drawerItem.getIdentifier() == 4) {
                                 dId = 4;
                                 mTabLayout.removeAllTabs();
@@ -278,7 +302,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
             //set the active profile
             headerResult.setActiveProfile(profile);
         }
-        result.updateBadge(7, new StringHolder(10 + ""));
+        result.updateBadge(9, new StringHolder(10 + ""));
     }
 
     private void setLisner() {
@@ -359,6 +383,27 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         String[] titles = getResources().getStringArray(R.array.text_tab);
         // ArticleTabAdapter adapter =
         mAdapter = new ArticleTabAdapter(getSupportFragmentManager(), Arrays.asList(titles));
+        new SetAdapterTask().execute();
+        /*mViewPager.setAdapter(adapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabsFromPagerAdapter(adapter);*/
+    }
+    private void setupNewsViewPager() {
+        mTabLayout.removeAllTabs();
+        if (mPlayService != null && mPlayService.isPlaying()) {
+            flPlayBar.setVisibility(View.VISIBLE);
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            lp.setMargins(0,0, 0, marginBottom);
+            coordinatorLayout.setLayoutParams(lp);
+        } else {
+            flPlayBar.setVisibility(View.GONE);
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            lp.setMargins(0,0, 0,0);
+            coordinatorLayout.setLayoutParams(lp);
+        }
+        String[] titles = getResources().getStringArray(R.array.news_tab);
+        // ArticleTabAdapter adapter =
+        mAdapter = new NewsTabAdapter(getSupportFragmentManager(), Arrays.asList(titles));
         new SetAdapterTask().execute();
         /*mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -584,6 +629,22 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
         ft.commit();
         isPlayFragmentShow = false;
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        // TODO Auto-generated method stub
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
+                   updateWeather();
+
+                } else {
+                    ToastFactory.show("无法定位当前设备位置……");
+                }
+
+                break;
+        }
+    }
 
 }

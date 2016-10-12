@@ -8,7 +8,8 @@
     <dimen name="dp_thirty">30dp</dimen>
     <dimen name="dp_five">5dp</dimen>
     <dimen name="dp_one">1dp</dimen>
-
+    <dimen name="title_view_left_back_padding_left">12.0dip</dimen>
+    <dimen name="title_view_left_back_padding_right">12.0dip</dimen>
     <dimen name="big_large_text">24sp</dimen>
     <dimen name="large_text">22sp</dimen>
     <dimen name="big_medium_text">20sp</dimen>
@@ -21,4 +22,28 @@
     <dimen name="play_bar_height">57dp</dimen>
     <dimen name="screen_tips_top">80dp</dimen>
     <dimen name="divider_height">0.5dp</dimen>
+    <!--字体大小-->
+    <dimen name="big_large">24sp</dimen>
+    <dimen name="large">22sp</dimen>
+    <dimen name="big_medium">20sp</dimen>
+    <dimen name="medium">18sp</dimen>
+    <dimen name="big_small">16sp</dimen>
+    <dimen name="small">14sp</dimen>
+    <dimen name="micro">12sp</dimen>
+
+    <dimen name="textsize_10">10dip</dimen>
+    <dimen name="textsize_11">11dip</dimen>
+    <dimen name="textsize_12">12dip</dimen>
+    <dimen name="textsize_13">13dip</dimen>
+    <dimen name="textsize_14">14dip</dimen>
+    <dimen name="textsize_15">15.0dip</dimen>
+    <dimen name="textsize_16">16dip</dimen>
+    <dimen name="textsize_17">17dip</dimen>
+    <dimen name="textsize_18">18.0dip</dimen>
+    <dimen name="textsize_19">18dip</dimen>
+    <dimen name="textsize_20">18dip</dimen>
+    <!--新闻item-->
+    <dimen name="item_margin">8dp</dimen>
+    <dimen name="title_margin">24dp</dimen>
+    <dimen name="header_bar_height">45.0dip</dimen>
 </resources>

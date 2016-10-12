@@ -4,6 +4,7 @@ package com.chenpan.commoner.mvp.presenter;
 import com.chenpan.commoner.base.pbase.BasePresenter;
 import com.chenpan.commoner.bean.Constants;
 import com.chenpan.commoner.bean.JOnlineMusicList;
+import com.chenpan.commoner.mvp.modle.MyCallback;
 import com.chenpan.commoner.mvp.modle.OnlineMusicModel;
 import com.chenpan.commoner.mvp.modle.imp.IOnlineMusicModel;
 import com.chenpan.commoner.mvp.view.OnlineMusicView;
@@ -32,7 +33,7 @@ public class OnlineMusicPresenter extends BasePresenter<OnlineMusicView> {
         param.put(Constants.PARAM_OFFSET, String.valueOf(offset));
 
 
-        onlineMusicModel.parserMusic(url, url, param, new OnlineMusicModel.Callback<JOnlineMusicList>() {
+        onlineMusicModel.parserMusic(url, url, param, new MyCallback<JOnlineMusicList>() {
             @Override
             public void onSccuss(JOnlineMusicList data) {
                 if (data == null || data.getSong_list() == null || data.getSong_list().size() == 0) {

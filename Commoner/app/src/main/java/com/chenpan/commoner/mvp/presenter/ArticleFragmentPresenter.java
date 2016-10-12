@@ -5,6 +5,7 @@ import android.content.Context;
 import com.chenpan.commoner.base.pbase.BasePresenter;
 import com.chenpan.commoner.bean.ArticleBean;
 import com.chenpan.commoner.mvp.modle.ArticleFragmentModel;
+import com.chenpan.commoner.mvp.modle.MyCallback;
 import com.chenpan.commoner.mvp.modle.imp.IArticleFragmentModel;
 import com.chenpan.commoner.mvp.view.IArticleFragmentView;
 
@@ -27,7 +28,7 @@ public class ArticleFragmentPresenter extends BasePresenter<IArticleFragmentView
             getWeakView().showNoNet();
             return;
         }
-        articleFragmentModel.parserArticle(context, url, tag, new ArticleFragmentModel.Callback<List<ArticleBean>>() {
+        articleFragmentModel.parserArticle(context, url, tag, new MyCallback<List<ArticleBean>>() {
             @Override
             public void onSccuss(List<ArticleBean> data) {
                 if (getWeakView() == null) return;

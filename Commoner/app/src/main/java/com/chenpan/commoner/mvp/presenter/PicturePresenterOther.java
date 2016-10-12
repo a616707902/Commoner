@@ -3,8 +3,8 @@ package com.chenpan.commoner.mvp.presenter;
 import android.content.Context;
 
 import com.chenpan.commoner.base.pbase.BasePresenter;
-import com.chenpan.commoner.bean.PictureBean;
 import com.chenpan.commoner.bean.PictureBeanOther;
+import com.chenpan.commoner.mvp.modle.MyCallback;
 import com.chenpan.commoner.mvp.modle.PictureFramentModel;
 import com.chenpan.commoner.mvp.modle.imp.IPictureFragmentOtherModel;
 import com.chenpan.commoner.mvp.view.IPictureView;
@@ -28,7 +28,7 @@ public class PicturePresenterOther extends BasePresenter<IPictureView> {
         }
         url = tag + "?page=" + params.get("page");
 
-        pictureFramentModel.parserPictureOther(context, url, tag, new PictureFramentModel.Callback<List<PictureBeanOther>>() {
+        pictureFramentModel.parserPictureOther(context, url, tag, new MyCallback<List<PictureBeanOther>>() {
             @Override
             public void onSccuss(List<PictureBeanOther> data) {
                 if (getWeakView() == null) return;

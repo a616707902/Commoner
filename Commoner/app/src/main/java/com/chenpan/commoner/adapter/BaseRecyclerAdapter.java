@@ -1,9 +1,13 @@
 package com.chenpan.commoner.adapter;
 
+import android.support.annotation.AnimRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
+import com.chenpan.commoner.R;
 import com.chenpan.commoner.holder.BaseHolder;
 import com.chenpan.commoner.utils.ContextUtils;
 
@@ -17,6 +21,7 @@ import java.util.List;
 public class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>> {
     private List<T> mDatas;
     private int mResLayout;
+    protected int mLastPosition = -1;
     private Class<? extends BaseHolder<T>> mClazz;
     public HashMap<Integer, Object> tags = new HashMap<>();
     public void setmDatas(List<T> mDatas) {
@@ -77,6 +82,15 @@ public class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>> 
     @Override
     public void onBindViewHolder(BaseHolder<T> holder, int position) {
         holder.setData(mDatas.get(position),position);
+        setItemAppearAnimation(holder, position, R.anim.anim_bottom_in);
+    }
+
+    protected void setItemAppearAnimation(RecyclerView.ViewHolder holder, int position, @AnimRes int type) {
+        if (position > mLastPosition/* && !isFooterPosition(position)*/) {
+            Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), type);
+            holder.itemView.startAnimation(animation);
+            mLastPosition = position;
+        }
     }
     public BaseRecyclerAdapter(List<T> mDatas, int mResLayout, Class<? extends BaseHolder<T>> mClazz) {
         if (mClazz == null) {
@@ -89,6 +103,8 @@ public class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>> 
         this.mResLayout = mResLayout;
         this.mClazz = mClazz;
     }
+
+
     @Override
     public int getItemCount() {
         return mDatas.size();

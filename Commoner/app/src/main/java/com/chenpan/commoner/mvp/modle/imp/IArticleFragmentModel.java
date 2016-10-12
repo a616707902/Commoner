@@ -6,27 +6,18 @@ import android.text.TextUtils;
 import com.android.volley.VolleyError;
 import com.chenpan.commoner.bean.ArticleBean;
 import com.chenpan.commoner.mvp.modle.ArticleFragmentModel;
+import com.chenpan.commoner.mvp.modle.MyCallback;
 import com.chenpan.commoner.network.VolleyInterface;
 import com.chenpan.commoner.network.VolleyRequest;
-
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Entities;
 import org.jsoup.select.Elements;
-import org.xml.sax.InputSource;
 
-import java.io.StringReader;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import retrofit.http.Url;
 
 /**
  * Created by Administrator on 2016/6/3.
@@ -34,7 +25,7 @@ import retrofit.http.Url;
 public class IArticleFragmentModel implements ArticleFragmentModel {
 
     @Override
-    public void parserArticle(Context context, String url, String tag, final Callback<List<ArticleBean>> mCallback) {
+    public void parserArticle(Context context, String url, String tag, final MyCallback<List<ArticleBean>> mCallback) {
         VolleyRequest.RequestGetString(url, tag, new VolleyInterface() {
             @Override
             public void onMySuccess(String results) {

@@ -42,4 +42,26 @@
     <color name="windowBackground">#fafafa</color>
 
     <color name="tab_line">#2196F3</color>
+    <!--新闻item背景颜色-->
+
+    <color name="item_background">#FAFAFA</color>
+    <!--87%white-->
+    <color name="primary_text">#de000000</color>
+    <color name="primary_text_white">#deffffff</color>
+    <!--54%black-->
+    <color name="tertiary_text">#8a000000</color>
+    <!--87%black-->
+    <color name="secondary_text">#8a000000</color>
+
+    <!-- 新闻频道 -->
+    <string name="channel_explain">点击可增删/长按并拖拽可排序</string>
+    <string name="my_channel">我的频道</string>
+    <string name="more_channel">更多频道</string>
+    <string name="channel_manage">频道管理</string>
+    <color name="title_text_color">#ff363636</color>
+    <color name="alpha_20_black">#33000000</color>
+    <color name="alpha_10_black">#1A000000</color>
+    <color name="container_background">#EBEBEB</color>
+    <string name="news_from">%1$s %2$s</string>
+
 </resources>

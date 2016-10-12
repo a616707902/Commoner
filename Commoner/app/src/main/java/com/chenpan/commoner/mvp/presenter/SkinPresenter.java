@@ -18,7 +18,7 @@ public class SkinPresenter extends BasePresenter<SkinView> {
             .getExternalStorageDirectory() + File.separator;
 
     public void setRedSkin(String filename) {
-        SkinModel.setRedSkin(SKIN_DIR + filename, new SkinModel.Callback() {
+        SkinModel.setRedSkin(SKIN_DIR + filename, new SkinModel.CallbackSkin() {
             @Override
             public void onSccuss() {
                 getWeakView().showSucceed();
@@ -38,7 +38,7 @@ public class SkinPresenter extends BasePresenter<SkinView> {
     }
 
     public void setBlueSkin() {
-        SkinModel.setBlueSkin(new SkinModel.Callback() {
+        SkinModel.setBlueSkin(new SkinModel.CallbackSkin() {
             @Override
             public void onSccuss() {
                 getWeakView().showSucceed();

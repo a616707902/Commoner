@@ -59,4 +59,15 @@
         <item name="android:layout_margin">@dimen/item_margin</item>
         <item name="android:scaleType">centerCrop</item>
     </style>
+    <style name="ATheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Main theme colors -->
+        <!--   your app's branding color (for the app bar) 导航栏-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--   darker variant of colorPrimary (for status bar, contextual app bars)  状态栏 -->
+        <item name="colorPrimaryDark">@color/black</item>
+        <!--   theme UI controls like checkboxes and text fields UI控件 -->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="android:textColorPrimary">@color/white</item>-->
+        <item name="android:windowBackground">@color/windowBackground</item>
+    </style>
 </resources>

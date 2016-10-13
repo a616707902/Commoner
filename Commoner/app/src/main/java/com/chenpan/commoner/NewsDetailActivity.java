@@ -10,7 +10,6 @@ import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.chenpan.commoner.base.BaseActivity;
@@ -21,6 +20,9 @@ import com.chenpan.commoner.mvp.view.INewsDetailView;
 import com.chenpan.commoner.utils.CommonUtils;
 import com.chenpan.commoner.utils.SystemUtils;
 import com.chenpan.commoner.widget.URLImageGetter;
+import com.chenpan.commoner.widget.load.LoadingState;
+import com.chenpan.commoner.widget.load.LoadingView;
+import com.chenpan.commoner.widget.load.OnRetryListener;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -46,8 +48,8 @@ public class NewsDetailActivity extends BaseActivity<INewsDetailView, NewsDetail
     TextView mNewsDetailFromTv;
     @Bind(R.id.news_detail_body_tv)
     TextView mNewsDetailBodyTv;
-    @Bind(R.id.progress_bar)
-    ProgressBar mProgressBar;
+    @Bind(R.id.fl_loading)
+    LoadingView flLoading;
     @Bind(R.id.fab)
     FloatingActionButton mFab;
     String postId;
@@ -81,6 +83,15 @@ public class NewsDetailActivity extends BaseActivity<INewsDetailView, NewsDetail
     public void bindViewAndAction(Bundle savedInstanceState) {
         mPresenter.setPostId(postId);
         mPresenter.loadNewsDetail(this);
+        flLoading.withLoadedEmptyText("≥﹏≤ , 连条毛都没有 !").withEmptyIco(R.drawable.note_empty).withBtnEmptyEnnable(false)
+                .withErrorIco(R.drawable.ic_chat_empty).withLoadedErrorText("(῀( ˙᷄ỏ˙᷅ )῀)ᵒᵐᵍᵎᵎᵎ,我家程序猿跑路了 !").withbtnErrorText("去找回她!!!")
+                .withLoadedNoNetText("你挡着信号啦o(￣ヘ￣o)☞ᗒᗒ 你走").withNoNetIco(R.drawable.ic_chat_empty).withbtnNoNetText("网弄好了，重试")
+                .withLoadingText("加载中...").withOnRetryListener(new OnRetryListener() {
+            @Override
+            public void onRetry() {
+                mPresenter.loadNewsDetail(NewsDetailActivity.this);
+            }
+        }).build();
     }
 
     @Override
@@ -107,7 +118,8 @@ public class NewsDetailActivity extends BaseActivity<INewsDetailView, NewsDetail
 
     @Override
     public void showFild() {
-        mNewsDetailBodyTv.setText("加载失败");
+        flLoading.setVisibility(View.VISIBLE);
+        flLoading.setState(LoadingState.STATE_EMPTY);
     }
 
     private void setNewsDetailPhotoIv(String imgSrc) {
@@ -119,7 +131,7 @@ public class NewsDetailActivity extends BaseActivity<INewsDetailView, NewsDetail
 
 
     private void setBody(NewsDetail newsDetail, String newsBody) {
-        mProgressBar.setVisibility(View.GONE);
+        flLoading.setVisibility(View.GONE);
         mFab.setVisibility(View.VISIBLE);
         YoYo.with(Techniques.RollIn).playOn(mFab);
         int imgTotal = newsDetail.getImg().size();

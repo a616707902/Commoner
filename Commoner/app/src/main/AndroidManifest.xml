@@ -62,7 +62,7 @@
         <activity
             android:name=".ImagesDetailActivity"
             android:label="@string/title_activity_photo"
-            android:theme="@style/TranslucentTheme"/>
+            android:theme="@style/ATheme"/>
         <activity
             android:name=".OnlineMusicActivity"
             android:label="@string/title_activity_photo"
@@ -94,7 +94,7 @@
         <activity
             android:name=".NewsPhotoDetailActivity"
             android:label="@string/title_activity_news_photo_detail"
-            android:theme="@style/AppTheme">
+            android:theme="@style/ATheme">
         </activity>
         <activity
             android:name=".NewsDetailActivity"

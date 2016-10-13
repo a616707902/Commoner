@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/material_drawer_item_primary"
-    android:orientation="horizontal"
-    android:paddingEnd="@dimen/material_drawer_vertical_padding"
-    android:paddingLeft="@dimen/material_drawer_vertical_padding"
-    android:paddingRight="@dimen/material_drawer_vertical_padding"
-    android:paddingStart="@dimen/material_drawer_vertical_padding">
+              xmlns:skin="http://schemas.android.com/android/skin"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/material_drawer_item_primary"
+              android:orientation="horizontal"
+              android:paddingEnd="@dimen/material_drawer_vertical_padding"
+              android:paddingLeft="@dimen/material_drawer_vertical_padding"
+              android:paddingRight="@dimen/material_drawer_vertical_padding"
+              android:paddingStart="@dimen/material_drawer_vertical_padding"
+              skin:enable="true">
 
     <ImageView
         android:id="@+id/material_drawer_icon"
@@ -19,7 +21,8 @@
         android:paddingLeft="0dp"
         android:paddingRight="@dimen/material_drawer_item_primary_icon_padding_right"
         android:paddingStart="0dp"
-        android:paddingTop="@dimen/material_drawer_item_primary_icon_padding" />
+        android:paddingTop="@dimen/material_drawer_item_primary_icon_padding"
+        skin:enable="true"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -38,7 +41,8 @@
             android:singleLine="true"
             android:textDirection="anyRtl"
             android:textSize="@dimen/material_drawer_item_primary_text"
-            tools:text="Some drawer text" />
+            skin:enable="true"
+            tools:text="Some drawer text"/>
 
         <TextView
             android:id="@+id/material_drawer_description"
@@ -50,7 +54,7 @@
             android:singleLine="true"
             android:textDirection="anyRtl"
             android:textSize="@dimen/material_drawer_item_primary_description"
-            tools:text="Some drawer text" />
+            tools:text="Some drawer text"/>
     </LinearLayout>
 
     <LinearLayout
@@ -75,6 +79,6 @@
             android:paddingRight="1dp"
             android:singleLine="true"
             android:textSize="@dimen/material_drawer_item_primary_text"
-            tools:text="99" />
+            tools:text="99"/>
     </LinearLayout>
 </LinearLayout>

@@ -28,7 +28,7 @@
     <color name="translucent_grey">#809E9E9E</color>
     <color name="translucent_white">#80FFFFFF</color>
     <color name="black">@android:color/black</color>
-    <color name="translucent_white_96p">#F5FFFFFF</color>
+    <color name="translucent_white_96p">#303F9F</color>
     <color name="translucent_grey_300_96p">#F5E0E0E0</color>
     <color name="translucent_grey_900_96p">#F5212121</color>
     <color name="translucent_grey_700_96p">#F5616161</color>

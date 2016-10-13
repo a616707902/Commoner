@@ -48,11 +48,16 @@
             网红脸让人看的赏心悦目。但是，比起那些年轰动的民国美女和才女们，她还是略有逊色。
             要知道这些美女和才女们，不论是本尊还是是后世扮演她们的演员，真真是极美的。这些人里有你心中女神么？"/>
 
-        <ProgressBar
+      <!--  <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="200dp"/>
+            android:layout_marginTop="200dp"/>-->
+        <com.chenpan.commoner.widget.load.LoadingView
+            android:id="@+id/fl_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

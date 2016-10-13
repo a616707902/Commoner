@@ -38,7 +38,7 @@ public class ArticleActivity extends BaseActivity<ArticleView, ArticlePresenter>
 
     @Override
     public boolean isSetStatusBar() {
-        return false;
+        return true;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ArticleActivity extends BaseActivity<ArticleView, ArticlePresenter>
                 .withLoadingText("加载中...").withOnRetryListener(new OnRetryListener() {
             @Override
             public void onRetry() {
-
+                mPresenter.getcontentArticle(ArticleActivity.this, mArticle.href);
             }
         }).build();
         if (mPresenter == null) return;

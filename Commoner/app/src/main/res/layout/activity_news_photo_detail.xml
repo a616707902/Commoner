@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:skin="http://schemas.android.com/android/skin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
@@ -15,6 +16,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/material_drawer_primary"
         app:layout_scrollFlags="scroll|enterAlways"
+
         app:theme="@style/ToolbarTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     <RelativeLayout
@@ -32,7 +34,7 @@
             android:paddingLeft="@dimen/title_view_left_back_padding_left"
             android:paddingRight="@dimen/title_view_left_back_padding_right"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_arrow_back" />
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:id="@+id/album_title"

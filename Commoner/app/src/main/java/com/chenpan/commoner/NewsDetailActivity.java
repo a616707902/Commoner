@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -79,6 +80,7 @@ public class NewsDetailActivity extends BaseActivity<INewsDetailView, NewsDetail
     @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
         mPresenter.setPostId(postId);
+        mPresenter.loadNewsDetail(this);
     }
 
     @Override
@@ -102,6 +104,12 @@ public class NewsDetailActivity extends BaseActivity<INewsDetailView, NewsDetail
         setNewsDetailPhotoIv(NewsImgSrc);
         setBody(newsDetail, newsBody);
     }
+
+    @Override
+    public void showFild() {
+        mNewsDetailBodyTv.setText("加载失败");
+    }
+
     private void setNewsDetailPhotoIv(String imgSrc) {
         if (!CommonUtils.isEmpty(imgSrc)) {
             ImageLoader.getInstance().displayImage(imgSrc,mNewsDetailPhotoIv);
@@ -126,6 +134,7 @@ public class NewsDetailActivity extends BaseActivity<INewsDetailView, NewsDetail
 
 
     private void setToolBarLayout(String newsTitle) {
+
         mToolbarLayout.setTitle(newsTitle);
         mToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.white));
         mToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.primary_text_white));
@@ -139,5 +148,15 @@ public class NewsDetailActivity extends BaseActivity<INewsDetailView, NewsDetail
             imgSrc = getIntent().getStringExtra(Constants.NEWS_IMG_RES);
         }
         return imgSrc;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

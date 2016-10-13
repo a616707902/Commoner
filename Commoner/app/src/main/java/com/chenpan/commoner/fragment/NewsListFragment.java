@@ -94,6 +94,8 @@ public class NewsListFragment extends BaseFragment<INewsFragmentView, NewsFragme
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                params.put("pageNO", String.valueOf(0));
+                params.put("page", String.valueOf(0));
                 mPresenter.getNewsList(getActivity(), type, params);
             }
         });

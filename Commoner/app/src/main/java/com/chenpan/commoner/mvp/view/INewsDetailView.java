@@ -11,4 +11,5 @@ import com.chenpan.commoner.bean.NewsDetail;
 
 public interface INewsDetailView {
     void setNewsDetail(NewsDetail newsDetail);
+    void  showFild();
 }

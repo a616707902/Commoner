@@ -2,7 +2,10 @@ package com.chenpan.commoner.fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.chenpan.commoner.R;
 import com.chenpan.commoner.base.BaseFragment;
@@ -27,7 +30,10 @@ public class PhotoDetailFragment extends BaseFragment {
     @Bind(R.id.photo_view)
     PhotoView mPhotoView;
     @Bind(R.id.progress_bar)
-    ProgressBar mProgressBar;
+    ImageView mProgressBar;
+    @Bind(R.id.progress_photo)
+    LinearLayout mProgressPhoto;
+
     private String mImgSrc;
 
 
@@ -38,12 +44,14 @@ public class PhotoDetailFragment extends BaseFragment {
 
     @Override
     public void bindViewAndAction(Bundle savedInstanceState) {
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_loading);
+        mProgressBar.startAnimation(animation);
         if (getArguments() != null) {
             mImgSrc = getArguments().getString(Constants.PHOTO_DETAIL_IMGSRC);
         }
         if (!CommonUtils.isEmpty(mImgSrc)) {
             ImageLoader.getInstance().displayImage(mImgSrc, mPhotoView);
-            mProgressBar.setVisibility(View.GONE);
+            mProgressPhoto.setVisibility(View.GONE);
         }
     }
 
@@ -51,6 +59,5 @@ public class PhotoDetailFragment extends BaseFragment {
     public int getContentLayout() {
         return R.layout.fragment_news_photo_detail;
     }
-
 
 }

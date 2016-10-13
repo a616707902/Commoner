@@ -175,7 +175,7 @@
     <string name="transition_photos">transition_animation_news_photos</string>
     <string name="photo_collections">图集：%1$s</string>
     <string name="title_activity_news_photo_detail">NewsPhotoDetailActivity</string>
-    <string name="title_activity_news_detail">NewsDetailActivity</string>
+    <string name="title_activity_news_detail">新闻</string>
     <string name="photonews">图片新闻</string>
     <string name="photo_detail_title">%1$d/%2$d　%3$s</string>
 </resources>

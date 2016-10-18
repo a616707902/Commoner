@@ -44,7 +44,9 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:theme="@style/TranslucentTheme">
+            android:theme="@style/TranslucentTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -54,19 +56,27 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/TranslucentTheme"/>
+            android:theme="@style/ATheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ArticleActivity"
             android:label="@string/title_activity_article"
-            android:theme="@style/TranslucentTheme"/>
+            android:theme="@style/TranslucentTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ImagesDetailActivity"
             android:label="@string/title_activity_photo"
-            android:theme="@style/ATheme"/>
+            android:theme="@style/ATheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".OnlineMusicActivity"
             android:label="@string/title_activity_photo"
-            android:theme="@style/TranslucentTheme"/>
+            android:theme="@style/TranslucentTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".service.PlayService"/>
 
@@ -84,7 +94,9 @@
         <activity
             android:name=".SkinActivity"
             android:label="@string/title_activity_skin"
-            android:theme="@style/TranslucentTheme"/>
+            android:theme="@style/TranslucentTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
         <!-- //开发者申请的key -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -94,12 +106,16 @@
         <activity
             android:name=".NewsPhotoDetailActivity"
             android:label="@string/title_activity_news_photo_detail"
-            android:theme="@style/ATheme">
+            android:theme="@style/ATheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".NewsDetailActivity"
             android:label="@string/title_activity_news_detail"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

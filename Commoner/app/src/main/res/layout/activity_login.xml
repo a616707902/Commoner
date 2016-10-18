@@ -1,14 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/black"
+               >
 
     <ImageView
         android:id="@+id/splash_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/afternoon" />
+        android:src="@drawable/afternoon"/>
 
     <TextView
         android:id="@+id/splash_app_name"
@@ -20,7 +21,7 @@
         android:text="@string/app_name"
         android:textColor="@android:color/white"
         android:textSize="50sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/account"
@@ -29,9 +30,9 @@
         android:layout_below="@id/splash_app_name"
         android:layout_marginLeft="@dimen/dp_fifty"
         android:layout_marginRight="@dimen/dp_fifty"
+        android:drawableLeft="@drawable/account"
         android:hint="@string/account"
-        android:paddingLeft="@dimen/dp_five"
-        android:drawableLeft="@drawable/account"/>
+        android:paddingLeft="@dimen/dp_five"/>
 
     <EditText
         android:id="@+id/password"
@@ -40,9 +41,9 @@
         android:layout_below="@id/account"
         android:layout_marginLeft="@dimen/dp_fifty"
         android:layout_marginRight="@dimen/dp_fifty"
+        android:drawableLeft="@drawable/pwd"
         android:hint="@string/password"
-        android:paddingLeft="@dimen/dp_five"
-        android:drawableLeft="@drawable/pwd"/>
+        android:paddingLeft="@dimen/dp_five"/>
 
     <Button
         android:id="@+id/loginbtn"
@@ -52,10 +53,10 @@
         android:layout_marginLeft="@dimen/dp_fifty"
         android:layout_marginRight="@dimen/dp_fifty"
         android:layout_marginTop="@dimen/dp_thirty"
+        android:background="#56abe4"
         android:text="@string/login"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:background="#56abe4"/>
+        android:textStyle="bold"/>
 
     <RelativeLayout
         android:id="@+id/tools"
@@ -72,7 +73,7 @@
             android:layout_marginLeft="@dimen/dp_five"
             android:background="@null"
             android:text="@string/forget"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/register"
@@ -82,7 +83,7 @@
             android:layout_marginRight="@dimen/dp_five"
             android:background="@null"
             android:text="@string/register"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -90,18 +91,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_below="@id/tools"
+        android:layout_marginBottom="@dimen/dp_thirty"
         android:layout_marginLeft="@dimen/dp_fifty"
         android:layout_marginRight="@dimen/dp_fifty"
         android:layout_marginTop="@dimen/dp_thirty"
-        android:gravity="center"
-        android:layout_marginBottom="@dimen/dp_thirty">
+        android:gravity="center">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginLeft="@dimen/dp_thirty"
             android:layout_marginRight="@dimen/dp_thirty"
-            android:background="@color/white" />
+            android:background="@color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -113,14 +114,16 @@
                 android:id="@+id/qq"
                 android:layout_width="@dimen/dp_fifty"
                 android:layout_height="@dimen/dp_fifty"
-                android:src="@drawable/qq" />
+                android:src="@drawable/qq"
+                android:background="#a0eeeeee"/>
 
             <ImageView
                 android:id="@+id/sina"
                 android:layout_width="@dimen/dp_fifty"
                 android:layout_height="@dimen/dp_fifty"
                 android:layout_marginLeft="@dimen/dp_five"
-                android:src="@drawable/sina" />
+                android:src="@drawable/sina"
+                android:background="#a0eeeeee"/>
 
         </LinearLayout>
 

@@ -91,6 +91,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         return false;
     }
 
+
     @Override
     public LoginPresenter createPresenter() {
         return new LoginPresenter(this);

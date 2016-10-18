@@ -33,17 +33,16 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SkinBa
     private View mRootView;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= 21&&!isSetStatusBar()) {
-            View decorView = getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            decorView.setSystemUiVisibility(option);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }else if (Build.VERSION.SDK_INT >= 21&&isSetStatusBar()){
+            if (Build.VERSION.SDK_INT >= 21 && !isSetStatusBar()) {
+                View decorView = getWindow().getDecorView();
+                int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+                decorView.setSystemUiVisibility(option);
+                getWindow().setStatusBarColor(Color.TRANSPARENT);
+            } else if (Build.VERSION.SDK_INT >= 21 && isSetStatusBar()) {
                 View decorView = getWindow().getDecorView();
                 int option = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -51,12 +50,12 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SkinBa
                 decorView.setSystemUiVisibility(option);
                 getWindow().setNavigationBarColor(Color.TRANSPARENT);
                 getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+            }
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.hide();
         AppManager.getAppManager().addActivity(this);
 
-     //  initWindow();
+        //  initWindow();
         getIntentValue();
         mRootView = createView(null, null, savedInstanceState);
         setContentView(mRootView);
@@ -66,18 +65,21 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SkinBa
         //关联View
         mPresenter.attachView((V) this);
         mToolbar = (Toolbar) findViewById(getToolBarId());
-        setSupportActionBar(mToolbar);//这里要用到主题必须是隐藏了action的
-        setActionBar();
-      // dynamicAddSkinEnableView(mToolbar, "background", R.color.colorPrimary);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);//这里要用到主题必须是隐藏了action的
+            setActionBar();
+        }
+        // dynamicAddSkinEnableView(mToolbar, "background", R.color.colorPrimary);
 
         bindViewAndAction(savedInstanceState);
     }
+
 
     public void setActionBar() {
     }
 
     public void getIntentValue() {
-        
+
     }
 
     /**
@@ -85,7 +87,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SkinBa
      *
      * @return
      */
-   public abstract T createPresenter();
+    public abstract T createPresenter();
 
 
     /**
@@ -144,6 +146,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SkinBa
         mUIThreadId = android.os.Process.myTid();
         super.onNewIntent(intent);
     }
+
     public Toolbar getToolbar() {
         return mToolbar;
     }
@@ -152,8 +155,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SkinBa
     protected void onResume() {
         super.onResume();
     }
-
-
 
 
 }

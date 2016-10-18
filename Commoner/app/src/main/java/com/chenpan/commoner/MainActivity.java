@@ -168,13 +168,13 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
     LinearLayout footView;
     private void updateWeather() {
          footView= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.weather_foot,null);
-        footView.setOnClickListener(new View.OnClickListener() {
+      /*  footView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,WeatherActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
         new WeatherExecutor(this, footView,mAMapLocalWeatherLive).execute();
     }
     @Override
@@ -206,24 +206,25 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
             profile = new ProfileDrawerItem().withName(UserManager.getInstance().getUser().screen_name).withIcon(Uri.parse(UserManager.getInstance().getUser().profile_image_url)).withIdentifier(100);
 
         } else {
-            profile = new ProfileDrawerItem().withName("未登录").withIcon(R.mipmap.ic_launcher).withIdentifier(100);
+            profile = new ProfileDrawerItem().withName(getResources().getString(R.string.app_name)).withIcon(R.mipmap.ic_launcher).withIdentifier(100);
         }
         headerResult = new AccountHeaderBuilder().withOnlyMainProfileImageVisible(true).withSelectionListEnabled(false)
                 .withActivity(this).withHeightDp(220)
                 .withHeaderBackground(R.drawable.side_bg)
-                .addProfiles(
+                ./*addProfiles(
                         profile
-                ).withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                ).*/withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-                        if (UserManager.getInstance().isLogin()) {
+                      /*  if (UserManager.getInstance().isLogin()) {
                             return true;
                         } else {
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             startActivity(intent);
 
                             return true;
-                        }
+                        }*/
+                        return  true;
 
                     }
                 }).withSavedInstance(savedInstanceState)
@@ -242,8 +243,8 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
                         new PrimaryDrawerItem().withName(R.string.news).withIcon(R.drawable.news).withIdentifier(3).withSelectable(true),
                         new PrimaryDrawerItem().withName(R.string.music).withIcon(R.drawable.musicicon).withIdentifier(4).withSelectable(true),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(R.string.skinchange).withIcon(R.drawable.skin).withIdentifier(6).withSelectable(false),
-                        new PrimaryDrawerItem().withName(R.string.setting).withIcon(R.drawable.settingicon).withIdentifier(7).withSelectable(false)
+                        new PrimaryDrawerItem().withName(R.string.skinchange).withIcon(R.drawable.skin).withIdentifier(6).withSelectable(false)
+                       // new PrimaryDrawerItem().withName(R.string.setting).withIcon(R.drawable.settingicon).withIdentifier(7).withSelectable(false)
 
                 ) // add the items we want to use with our Drawer
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -355,7 +356,7 @@ public class MainActivity extends BaseActivity<MainView, MainPresenter> implemen
 
     @Override
     public boolean isSetStatusBar() {
-        return true;
+        return false;
     }
 
     /* private void setupVideoViewPager() {
